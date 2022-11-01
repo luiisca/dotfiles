@@ -12,5 +12,8 @@
 ### References
 - [Nvim lua guide](https://github.com/nanotee/nvim-lua-guide)
 - [Learn Vimscript](https://learnvimscriptthehardway.stevelosh.com)
+
 - [craftzdog's dotfiles](https://github.com/craftzdog/dotfiles-public)
+- [ThePrime's dotfiles](https://github.com/ThePrimeagen/.dotfiles)
+- [Nvim stable config](https://github.com/LunarVim/nvim-basic-ide)
 - [Oleksandr's dotfiles](https://gitlab.com/ejiqpep/nvim-config)
