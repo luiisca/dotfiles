@@ -7,15 +7,29 @@ local config_status_ok, nvim_tree_config = pcall(require, "nvim-tree.config")
 if not config_status_ok then
   return
 end
+local nnoremap = require("user.keymap").nnoremap
+
+nnoremap('sf', '<cmd>lua require"nvim-tree".open_replacing_current_buffer()<cr>')
+nnoremap(';sf', '<cmd>silent :NvimTreeToggle<cr>')
 
 local tree_cb = nvim_tree_config.nvim_tree_callback
 
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
 nvim_tree.setup {
+  hijack_netrw = true,
+    hijack_cursor = true,
+    hijack_directories = {
+        enable = true,
+    },
+    open_on_setup = true,
   update_focused_file = {
     enable = true,
-    update_cwd = true,
+    update_root = true,
   },
   renderer = {
+        highlight_opened_files = "all", -- 'none', 'icon', 'name', 'all'
     root_folder_modifier = ":t",
     icons = {
       glyphs = {
@@ -54,14 +68,32 @@ nvim_tree.setup {
     },
   },
   view = {
-    width = 30,
-    side = "left",
+        centralize_selection = true,
+    width = 40,
+        number = true,
+        relativenumber = true,
+
     mappings = {
       list = {
         { key = { "l", "<CR>", "o" }, cb = tree_cb "edit" },
         { key = "h", cb = tree_cb "close_node" },
         { key = "v", cb = tree_cb "vsplit" },
+        { key = "u", action = "dir_up" },
+        { key = "s", action = "" },
+        { key = "<CR>", action = "edit_in_place" }
       },
     },
+
   },
+    filters = {
+        custom = { "^.git$", "^node_modules$" }
+    },
+    actions = {
+        open_file = {
+            quit_on_open = true,
+        },
+        remove_file = {
+            close_window = false,
+        }
+    },
 }

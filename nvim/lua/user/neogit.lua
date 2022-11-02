@@ -9,6 +9,6 @@ local opts = { silent = true }
 vim.keymap.set("", "<Space>", "<Nop>", opts)
 vim.g.mapleader = " "
 
-nnoremap("<leader>gn", "<cmd>:Neogit<cr>");
+nnoremap("<leader>gn", "<cmd>silent :Neogit<CR>");
 
 nnoremap("<leader>gnf", "<cmd>!git fetch --all<CR>");

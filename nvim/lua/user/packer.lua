@@ -43,7 +43,6 @@ packer.startup(function(use)
   use { "nvim-lua/popup.nvim", commit = "b7404d35d5d3548a82149238289fa71f7f6de4ac" }
   use { 'nvim-telescope/telescope.nvim', commit = "97847309cbffbb33e442f07b8877d20322a26922" }
   use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', commit = "65c0ee3d4bb9cb696e262bca1ea5e9af3938fc90" }
-  use { 'nvim-telescope/telescope-file-browser.nvim', commit = "2429ecfd2d76e3eb6c9f8d8ba2c6ce328975a95a"}
 
   -- Colorschemes
   use { "sainnhe/gruvbox-material", commit = "2807579bd0a9981575dbb518aa65d3206f04ea02" }
