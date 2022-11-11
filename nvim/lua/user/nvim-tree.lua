@@ -76,9 +76,9 @@ nvim_tree.setup {
     mappings = {
       list = {
         { key = { "l", "<CR>", "o" }, cb = tree_cb "edit" },
-        { key = "h", cb = tree_cb "close_node" },
+        { key = "H", cb = tree_cb "close_node" },
         { key = "v", cb = tree_cb "vsplit" },
-        { key = "u", action = "dir_up" },
+        { key = "h", action = "dir_up" },
         { key = "s", action = "" },
         { key = "<CR>", action = "edit_in_place" }
       },
@@ -86,7 +86,7 @@ nvim_tree.setup {
 
   },
     filters = {
-        custom = { "^.git$", "^node_modules$" }
+        custom = { "^.git$" }
     },
     actions = {
         open_file = {

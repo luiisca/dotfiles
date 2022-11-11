@@ -6,9 +6,9 @@ vim.scriptencoding = 'utf-8'
 vim.opt.encoding = 'utf-8'
 vim.opt.fileencoding = 'utf-8'
 
-vim.opt.tabstop = 4
-vim.opt.softtabstop = 4
-vim.opt.shiftwidth = 4
+vim.opt.tabstop = 2
+vim.opt.softtabstop = 2
+vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
 
 vim.wo.number = true -- Show line number
@@ -38,7 +38,7 @@ vim.opt.wrap = false -- No Wrap lines
 vim.opt.linebreak = true
 vim.opt.backspace = { 'start', 'eol', 'indent' }
 vim.opt.path:append { '**' } -- Finding files - Search down into subfolders
-vim.opt.wildignore:append { '*/node_modules/*' }
+-- vim.opt.wildignore:append { '*/node_modules/*' }
 vim.opt.ruler = true -- Show cursor position
 vim.opt.updatetime = 50 -- Bad experience when it's default 4000
 vim.opt.lazyredraw = true
