@@ -1,0 +1,7 @@
+configuration {
+  icon-theme: "Papirus-Dark";
+  show-icons: true;
+  modi: "drun";
+}
+
+@theme "/home/luisca/.local/share/rofi/themes/squared-everforest.rasi"
