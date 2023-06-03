@@ -1,0 +1,36 @@
+" everforest (https://github.com/sainnhe/everforest/blob/master/palette.md) color scheme approximation for vifm
+highlight clear
+
+" xterm color -> everforest identifier
+" 59 -> bg1
+" 102 -> grey0
+" 131 -> bg_visual
+" 187 -> fg
+" 174 -> red
+" 172 -> orange
+" 180 -> yellow
+" 150 -> green
+" 109 -> blue
+" 175 -> purple
+
+highlight Border      cterm=none	ctermfg=default ctermbg=default
+highlight TopLine cterm=none	ctermfg=102 ctermbg=default
+highlight TopLineSel	cterm=none	ctermfg=102	ctermbg=59
+
+highlight Win cterm=none ctermfg=187 ctermbg=default
+highlight CurrLine cterm=none,inverse ctermfg=default	ctermbg=default
+highlight OtherLine   cterm=none ctermfg=default	ctermbg=59
+highlight Selected cterm=none ctermfg=187 ctermbg=131
+
+highlight StatusLine	cterm=none	ctermfg=150	ctermbg=default
+highlight ErrorMsg    cterm=bold	ctermfg=174 ctermbg=default
+highlight WildMenu cterm=none,inverse	ctermfg=150 ctermbg=default
+highlight CmdLine     cterm=None	ctermfg=102	ctermbg=default
+
+highlight Executable cterm=bold ctermfg=109 ctermbg=default
+highlight Directory cterm=bold ctermfg=150 ctermbg=default
+highlight Link cterm=none ctermfg=180 ctermbg=default
+highlight BrokenLink cterm=bold ctermfg=174 ctermbg=default
+highlight Device cterm=none,standout ctermfg=150 ctermbg=default
+highlight Fifo cterm=none ctermfg=172 ctermbg=default
+highlight Socket cterm=bold ctermfg=175 ctermbg=default
