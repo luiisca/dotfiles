@@ -330,6 +330,9 @@ globalkeys = my_table.join(
 	end, { description = "rofi fullscreen", group = "function keys" }),
 
 	-- super + ...
+	awful.key({ modkey }, ".", function()
+		awful.util.spawn("rofimoji --selector-args='-theme ~/.config/rofimoji/grid-theme.rasi -kb-row-left Left -kb-row-right Right -kb-move-char-back Control+b -kb-move-char-forward Control+f' --hidden-descriptions")
+	end, { description = "emoji selector", group = "super" }),
 	awful.key({ modkey }, "w", function()
 		awful.util.spawn(browser1)
 	end, { description = browser1, group = "super" }),

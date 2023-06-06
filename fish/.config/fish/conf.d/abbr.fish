@@ -323,3 +323,6 @@ abbr pamac-unlock "sudo rm /var/tmp/pamac/dbs/db.lock"
 
 #moving your personal files and folders from /personal to ~
 abbr personal 'cp -Rf /personal/* ~'
+
+#screenshot
+abbr ss scrot -d 5 -c

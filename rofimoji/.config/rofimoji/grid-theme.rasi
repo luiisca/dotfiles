@@ -1,0 +1,112 @@
+/*******************************************************************************
+ * ROFI SQUARED THEME USING THE EVERFOREST PALETTE
+ * User                 : LR-Tech
+ * Theme Repo           : https://github.com/lr-tech/rofi-themes-collection
+ *******************************************************************************/
+
+* {
+    bg0:     #2B3339;
+    bg1:     #323D43;
+    fg0:     #D3C6AA;
+
+    accent-color:     #A7C080;
+    urgent-color:     #DBBC7F;
+
+    background-color:   transparent;
+    text-color:         @fg0;
+
+    margin:     0;
+    padding:    8px;
+    spacing:    0;
+}
+
+window {
+    location:   center;
+
+    background-color:   @bg0;
+    border-radius: 6px;
+}
+
+inputbar {
+    spacing:    8px;
+    padding:    8px;
+    border-radius: 4px;
+    margin: 0 0 8px 0;
+
+    background-color:   @bg1;
+}
+
+prompt, entry, element-icon, element-text {
+    vertical-align: 0.5;
+}
+
+prompt {
+    text-color: @accent-color;
+}
+
+message {
+    padding: 0;
+    margin: 0 0 8px 0;
+}
+
+textbox {
+    border-radius: 4px;
+}
+
+element {
+  border-radius: 4px;
+}
+
+element-text {
+  font:            "FiraCode Nerd Font Mono 24";
+  text-color: inherit;
+  horizontal-align: 0.5;
+}
+
+element normal normal {
+    text-color: @fg0;
+}
+
+element normal urgent {
+    text-color: @urgent-color;
+}
+
+element normal active {
+    text-color: @accent-color;
+}
+
+element selected {
+    text-color: @bg0;
+}
+
+element selected normal, element selected active {
+    background-color:   @accent-color;
+}
+
+element selected urgent {
+    background-color:   @urgent-color;
+}
+
+element-icon {
+  enabled: false;
+}
+
+textbox {
+  padding:            8px;
+  background-color:   @bg1;
+  vertical-align:   0.5;
+  horizontal-align: 0.5;
+}
+
+listview {
+  columns:       9;
+  lines:         7;
+  cycle:         true;
+  dynamic:       true;
+  layout:        vertical;
+  flow:          horizontal;
+  reverse:       false;
+  fixed-height:  true;
+  fixed-columns: true;
+}
+

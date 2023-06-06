@@ -68,6 +68,7 @@ packer.startup(function(use)
 	use({ "jose-elias-alvarez/null-ls.nvim", commit = "77e53bc3bac34cc273be8ed9eb9ab78bcf67fa48" }) -- Use Neovim as a language server to inject LSP diagnostics, code actions, and more via Lua. Depends on plenary
 	use({ "RRethy/vim-illuminate", commit = "a2907275a6899c570d16e95b9db5fd921c167502" }) -- highlights occurrencies of current hovered word
 	use({ "simrat39/symbols-outline.nvim", commit = "512791925d57a61c545bc303356e8a8f7869763c" }) -- A tree like view for symbols (functions, classes, etc)
+	use({ "Fymyte/tree-sitter-rasi", commit = "371dac6bcce0df5566c1cfebde69d90ecbeefd2d" })
 
 	-- Snippets
 	use({ "L3MON4D3/LuaSnip", tag = "v<CurrentMajor>.*" }) -- snippet engine
