@@ -42,7 +42,8 @@ stow alacritty awesome fish nvim picom rofi rofimoji vifm ...
 | rofi | [https://github.com/davatorium/rofi](https://github.com/davatorium/rofi) |
 | rofimoji | [https://github.com/fdw/rofimoji](https://github.com/fdw/rofimoji) |
 | exa | [https://github.com/ogham/exa](https://github.com/ogham/exa) |
-| rust | [https://wiki.archlinux.org/title/rust](https://wiki.archlinux.org/title/rust) |
+| prettierd | [https://github.com/fsouza/prettierd](https://github.com/fsouza/prettierd)
+
 
 ## References
 Here are some useful resources that I used to learn more about the tools and technologies that I use in my dotfiles:
