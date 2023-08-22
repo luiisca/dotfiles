@@ -1,1 +1,1 @@
-require "user"
+print "Hello nvim!"

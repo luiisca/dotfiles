@@ -107,7 +107,7 @@ local browser1 = "google-chrome-stable"
 local browser2 = "microsoft-edge-dev"
 local editor = os.getenv("EDITOR") or "nvim"
 local filemanager = "vifm"
-local mediaplayer = "spotify"
+local mediaplayer = "Spotify"
 local terminal = "alacritty"
 
 -- awesome variables
@@ -810,15 +810,13 @@ awful.rules.rules = {
 
 	-- Set applications to always map on the tag 1 on screen 1.
 	-- find class or role via xprop command
-	{ rule = { class = browser1 }, properties = { screen = 1, tag = 1, switchtotag = true } },
-
-	{ rule = { class = browser2 }, properties = { screen = 1, tag = 3, switchtotag = true } },
+	-- { rule = { class = browser1 }, properties = { tag = "4" } },
+	-- { rule = { class = browser2 }, properties = { tag = "3", switchtotag = true } },
 
 	--{ rule = { class = "Vivaldi-stable" },
 	--properties = { screen = 1, tag = awful.util.tagnames[1], switchtotag = true } },
 
-	--{ rule = { class = "Chromium" },
-	--properties = { screen = 1, tag = awful.util.tagnames[1], switchtotag = true  } },
+	-- { rule = { class = "Chromium" }, properties = { screen = 1, tag = awful.util.tagnames[1], switchtotag = true } },
 
 	--{ rule = { class = "Opera" },
 	--properties = { screen = 1, tag = awful.util.tagnames[1],switchtotag = true  } },
@@ -858,10 +856,10 @@ awful.rules.rules = {
 
 	{
 		rule = { class = mediaplayer },
-		properties = { screen = 1, tag = awful.util.tagnames[4], maximized = true },
+		properties = { tag = "2" },
 	},
 
-	{ rule = { class = "Vlc" }, properties = { maximized = true } },
+	-- { rule = { class = "vlc" }, properties = { maximized = true } },
 
 	-- { rule = { class = "VirtualBox Manager" },
 	--       properties = { maximized = true } },
@@ -882,65 +880,68 @@ awful.rules.rules = {
 	--    { rule = { class = "Vivaldi-snapshot" },
 	--          properties = { callback = function (c) c.maximized = false end } },
 
-	{ rule = { class = "Xfce4-settings-manager" }, properties = { floating = false } },
+	{
+		rule = { class = "Xfce4-settings-manager" },
+		properties = { tag = "4", switchtotag = true, maximized = false, floating = false },
+	},
 
 	-- Floating clients.
-	{
-		rule_any = {
-			instance = {
-				"DTA", -- Firefox addon DownThemAll.
-				"copyq", -- Includes session name in class.
-			},
-			class = {
-				"Arandr",
-				"Arcolinux-welcome-app.py",
-				"Blueberry",
-				"Galculator",
-				"Gnome-font-viewer",
-				"Gpick",
-				"Imagewriter",
-				"Font-manager",
-				"Kruler",
-				"MessageWin", -- kalarm.
-				"archlinux-logout",
-				"Peek",
-				"Skype",
-				"System-config-printer.py",
-				"Sxiv",
-				"Unetbootin.elf",
-				"Wpa_gui",
-				"pinentry",
-				"veromix",
-				"xtightvncviewer",
-				"Xfce4-terminal",
-			},
-
-			name = {
-				"Event Tester", -- xev.
-			},
-			role = {
-				"AlarmWindow", -- Thunderbird's calendar.
-				"pop-up", -- e.g. Google Chrome's (detached) Developer Tools.
-				"Preferences",
-				"setup",
-			},
-		},
-		properties = { floating = true },
-	},
+	-- {
+	-- 	rule_any = {
+	-- 		instance = {
+	-- 			"DTA", -- Firefox addon DownThemAll.
+	-- 			"copyq", -- Includes session name in class.
+	-- 		},
+	-- 		class = {
+	-- 			"Arandr",
+	-- 			"Arcolinux-welcome-app.py",
+	-- 			"Blueberry",
+	-- 			"Galculator",
+	-- 			"Gnome-font-viewer",
+	-- 			"Gpick",
+	-- 			"Imagewriter",
+	-- 			"Font-manager",
+	-- 			"Kruler",
+	-- 			"MessageWin", -- kalarm.
+	-- 			"archlinux-logout",
+	-- 			"Peek",
+	-- 			"Skype",
+	-- 			"System-config-printer.py",
+	-- 			"Sxiv",
+	-- 			"Unetbootin.elf",
+	-- 			"Wpa_gui",
+	-- 			"pinentry",
+	-- 			"veromix",
+	-- 			"xtightvncviewer",
+	-- 			"Xfce4-terminal",
+	-- 		},
+	--
+	-- 		name = {
+	-- 			"Event Tester", -- xev.
+	-- 		},
+	-- 		role = {
+	-- 			"AlarmWindow", -- Thunderbird's calendar.
+	-- 			"pop-up", -- e.g. Google Chrome's (detached) Developer Tools.
+	-- 			"Preferences",
+	-- 			"setup",
+	-- 		},
+	-- 	},
+	-- 	properties = { floating = true },
+	-- },
 
 	-- Floating clients but centered in screen
-	{
-		rule_any = {
-			class = {
-				"Polkit-gnome-authentication-agent-1",
-				"Arcolinux-calamares-tool.py",
-			},
-		},
-		properties = { floating = true },
-		callback = function(c)
-			awful.placement.centered(c, nil)
-		end,
-	},
+	-- {
+	-- 	rule_any = {
+	-- 		class = {
+	-- 			"Polkit-gnome-authentication-agent-1",
+	-- 			"Arcolinux-calamares-tool.py",
+	-- 		},
+	-- 	},
+	-- 	properties = { floating = true },
+	-- 	callback = function(c)
+	-- 		awful.placement.centered(c, nil)
+	-- 	end,
+	-- },
 }
 -- }}}
 
@@ -949,7 +950,9 @@ awful.rules.rules = {
 client.connect_signal("manage", function(c)
 	-- Set the windows at the slave,
 	-- i.e. put it at the end of others instead of setting it master.
-	-- if not awesome.startup then awful.client.setslave(c) end
+	if not awesome.startup then
+		awful.client.setslave(c)
+	end
 
 	if awesome.startup and not c.size_hints.user_position and not c.size_hints.program_position then
 		-- Prevent clients from being unreachable after screen count changes.

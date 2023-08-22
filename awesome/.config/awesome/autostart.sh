@@ -1,34 +1,36 @@
 #!/bin/bash
 
+# Explain how does this work
+# the run function checks if a process with the name of the first word in the provided command is already running, and if it’s not, it runs the entire command and puts it in the background
 function run {
-  if ! pgrep $1 ;
+  cmd=$1
+  echo "Running: $cmd"
+  process=$(echo $cmd | awk '{print $1}')
+  echo "Process: $process"
+  if ! pgrep -f $process ;
   then
-    $@&
+    echo "Starting: $cmd"
+    eval "$cmd &"
   fi
 }
-# run dex $HOME/.config/autostart/arcolinux-welcome-app.desktop
-#run xrandr --output VGA-1 --primary --mode 1360x768 --pos 0x0 --rotate normal
-#run xrandr --output HDMI2 --mode 1920x1080 --pos 1920x0 --rotate normal --output HDMI1 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output VIRTUAL1 --off
-#autorandr horizontal
-run nm-applet
-#run caffeine
-run pamac-tray
-run blueberry-tray
-run /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-run numlockx on
-run volumeicon
-#you can set wallpapers in themes as well
-# feh --bg-fill /usr/share/backgrounds/archlinux/arch-wallpaper.jpg &
-# feh --bg-fill /usr/share/backgrounds/arcolinux/arco-wallpaper.jpg &
-#run applications from startup
-#run firefox
-#run atom
-#run dropbox
-#run insync start
-#run spotify
-#run ckb-next -b
-#run discord
-#run telegram-desktop
 
-run redshift -l -12.811801:-79.110661
+run "blueberry-tray"
+run "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
+run "numlockx on"
+run "volumeicon"
+run "syncthing"
+
+run "redshift -l -12.811801:-79.110661"
+
+run "playerctld daemon"
+run "LD_PRELOAD=/usr/local/lib/spotify-adblock.so spotify"
+# run "LD_PRELOAD=/usr/local/lib/spotify-adblock.so spotify --uri=spotify:track:1gwLjpvAbu6IVmVdAfPJ0G"
+# run "LD_PRELOAD=/usr/local/lib/spotify-adblock.so spotify --uri=spotify:playlist:6BGR7tHIUp8CdA6mNzm7l1"
+echo 'ABOUT TO PLAY SONG 🤯'
+sleep 1
+
+# because it shares same process as playerctld which causes run fn to skip it.
+playerctl open spotify:playlist:6BGR7tHIUp8CdA6mNzm7l1 &
+
+# Spotify
 
