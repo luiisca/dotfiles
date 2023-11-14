@@ -43,7 +43,7 @@ theme.layout_tilebottom = theme.dir .. "/icons/tilebottom.png"
 theme.layout_tiletop = theme.dir .. "/icons/tiletop.png"
 theme.tasklist_plain_task_name = true
 theme.tasklist_disable_icon = true
-theme.useless_gap = dpi(3)
+theme.useless_gap = dpi(0)
 -- theme.titlebar_close_button_normal              = theme.dir .."/titlebar/close_normal.png"
 -- theme.titlebar_close_button_focus               = theme.dir .."/titlebar/close_focus.png"
 -- theme.titlebar_minimize_button_normal           = theme.dir .."/titlebar/minimize_normal.png"
@@ -240,7 +240,7 @@ function theme.at_screen_connect(s)
 	s.mytasklist = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, awful.util.tasklist_buttons)
 
 	-- Create the wibox
-	s.mywibox = awful.wibar({ position = "bottom", screen = s, height = dpi(18) })
+	s.mywibox = awful.wibar({ position = "bottom", screen = s, height = dpi(18), visible = false })
 
 	-- Add widgets to the wibox
 	s.mywibox:setup({
