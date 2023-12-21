@@ -20,6 +20,7 @@ run "numlockx on"
 run "volumeicon"
 run "syncthing"
 
+run "nitrogen --restore"
 run "redshift -l -12.811801:-79.110661"
 
 run "playerctld daemon"
@@ -33,4 +34,3 @@ sleep 1
 playerctl open spotify:playlist:6BGR7tHIUp8CdA6mNzm7l1 &
 
 # Spotify
-
