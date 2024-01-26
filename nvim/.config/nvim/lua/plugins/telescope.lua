@@ -1,0 +1,91 @@
+return {
+	{
+		"nvim-telescope/telescope.nvim",
+		branch = "0.1.x",
+		dependencies = {
+			{
+				"nvim-lua/plenary.nvim",
+			},
+			{
+				"nvim-telescope/telescope-fzf-native.nvim",
+				build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
+			},
+		},
+		keys = {
+			{ "<leader>:", "<cmd>Telescope command_history<cr>", desc = "Command History" },
+
+			-- find
+			{ "<leader><space>", "<cmd>Telescope find_files<cr>", desc = "Find files" },
+			{ ";o", "<cmd>Telescope oldfiles<cr>", desc = "Recent" },
+			{
+				";gf",
+				function(opts)
+					opts = opts or {}
+					opts.cwd = vim.fn.systemlist("git rev-parse --show-toplevel")[1] or ""
+					require("telescope.builtin").find_files(opts)
+				end,
+				desc = "Git files",
+			},
+
+			-- search
+			{
+				";r",
+				function()
+					require("telescope.builtin").grep_string({ search = vim.fn.input("Grep For > ") })
+				end,
+				desc = "Grep string",
+			},
+			{ ";l", "<cmd>Telescope live_grep<cr>", desc = "Grep (root dir)" },
+			{ ";fb", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "Crr buffer fzf" },
+			{
+				";w",
+				function()
+					require("telescope.builtin").grep_string({ word_match = "-w" })
+				end,
+				desc = "Grep current word",
+			},
+			{
+				";w",
+				function()
+					require("telescope.builtin").grep_string()
+				end,
+				mode = "v",
+				desc = "Grep current word",
+			},
+			{
+				";;",
+				function()
+					require("telescope.builtin").resume({ initial_mode = "normal" })
+				end,
+				desc = "Resume",
+			},
+			{
+				";h",
+				function()
+					require("telescope.builtin").help_tags()
+				end,
+				desc = "Help tags",
+			},
+			{
+				";e",
+				function()
+					require("telescope.builtin").diagnostics()
+				end,
+				desc = "Diagnostics",
+			},
+			{
+				"<leader>uc",
+				function()
+					require("telescope.builtin").colorscheme({ enable_preview = true })
+				end,
+				desc = "Colorscheme with preview",
+			},
+			{ "<leader>sk", "<cmd>Telescope keymaps<cr>", desc = "Key Maps" },
+
+			-- git
+			{ "<leader>gb", "<cmd>Telescope git_branches<cr>", desc = "Git branches" },
+			{ "<leader>gc", "<cmd>Telescope git_commits<cr>", desc = "commits" },
+			{ "<leader>gs", "<cmd>Telescope git_status<cr>", desc = "status" },
+		},
+	},
+}
