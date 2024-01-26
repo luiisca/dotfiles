@@ -87,5 +87,39 @@ return {
 			{ "<leader>gc", "<cmd>Telescope git_commits<cr>", desc = "commits" },
 			{ "<leader>gs", "<cmd>Telescope git_status<cr>", desc = "status" },
 		},
+		opts = function()
+			local actions = require("telescope.actions")
+
+			local find_files_no_ignore = function()
+				local action_state = require("telescope.actions.state")
+				local line = action_state.get_current_line()
+				require("telescope.builtin").find_files({ no_ignore = true, default_text = line })
+			end
+			local find_files_with_hidden = function()
+				local action_state = require("telescope.actions.state")
+				local line = action_state.get_current_line()
+				require("telescope.builtin").find_files({ hidden = true, default_text = line })
+			end
+
+			return {
+				defaults = {
+					prompt_prefix = " ",
+					selection_caret = " ",
+					mappings = {
+						i = {
+							["<a-i>"] = find_files_no_ignore,
+							["<a-h>"] = find_files_with_hidden,
+							["<C-Down>"] = actions.cycle_history_next,
+							["<C-Up>"] = actions.cycle_history_prev,
+							["<C-f>"] = actions.preview_scrolling_down,
+							["<C-b>"] = actions.preview_scrolling_up,
+						},
+						n = {
+							["q"] = actions.close,
+						},
+					},
+				},
+			}
+		end,
 	},
 }
