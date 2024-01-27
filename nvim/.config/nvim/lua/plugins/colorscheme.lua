@@ -20,13 +20,24 @@ return {
     -- gruvbox
     {
         'morhetz/gruvbox', 
+        priority = 1000,
         config = function() 
             vim.cmd.colorscheme("gruvbox")
-        end 
+        end
     },
 
     -- kanagawa
     {
         "rebelot/kanagawa.nvim",
     },
+
+    -- catpuccin
+    {
+        "catppuccin/nvim",
+    },
+
+    -- everforest
+    {
+        "sainnhe/everforest",
+    }
 }
