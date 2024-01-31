@@ -26,6 +26,21 @@ return {
 			{ "hrsh7th/cmp-path" },
 			{ "hrsh7th/cmp-nvim-lua" },
 			{ "saadparwaiz1/cmp_luasnip" },
+			{
+				"ray-x/lsp_signature.nvim",
+				event = "VeryLazy",
+				opts = {
+					bind = true,
+					hint_prefix = "",
+					handler_opts = {
+						border = "none", -- double, rounded, single, shadow, none, or a table of borders
+					},
+					padding = " ",
+				},
+				config = function(_, opts)
+					require("lsp_signature").setup(opts)
+				end,
+			},
 		},
 		config = function()
 			-- Here is where you configure the autocompletion settings.
@@ -40,7 +55,7 @@ return {
 
 			cmp.setup({
 				completion = {
-					completeopt = "menu,menuone,noinsert",
+					completeopt = "menu,menuone,noinsert,preview",
 				},
 				snippet = {
 					expand = function(args)
@@ -103,7 +118,8 @@ return {
 							settings = {
 								Lua = {
 									completion = {
-										callSnippet = "Replace",
+										callSnippet = "Both",
+										displayContext = 4,
 									},
 								},
 							},
