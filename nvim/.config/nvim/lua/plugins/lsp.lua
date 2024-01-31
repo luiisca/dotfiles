@@ -52,6 +52,7 @@ return {
 			-- And you can configure cmp even more, if you want to.
 			local cmp = require("cmp")
 			local cmp_action = lsp_zero.cmp_action()
+			local cmp_select = { behavior = cmp.SelectBehavior.Select }
 
 			cmp.setup({
 				completion = {
@@ -71,12 +72,13 @@ return {
 				},
 				formatting = lsp_zero.cmp_format(),
 				mapping = cmp.mapping.preset.insert({
-					["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item
-					["<C-Space>"] = cmp.mapping.complete(),
-					["<C-u>"] = cmp.mapping.scroll_docs(-4),
-					["<C-d>"] = cmp.mapping.scroll_docs(4),
-					["<C-f>"] = cmp_action.luasnip_jump_forward(),
-					["<C-b>"] = cmp_action.luasnip_jump_backward(),
+					["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+					["<a-j>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
+					["<a-k>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
+					["<S-a-k>"] = cmp.mapping.scroll_docs(-4),
+					["<S-a-j>"] = cmp.mapping.scroll_docs(4),
+					["<a-f>"] = cmp.mapping.complete(),
+					["<a-e>"] = cmp.mapping.abort(),
 				}),
 			})
 
