@@ -39,6 +39,9 @@ return {
 			local cmp_action = lsp_zero.cmp_action()
 
 			cmp.setup({
+				completion = {
+					completeopt = "menu,menuone,noinsert",
+				},
 				snippet = {
 					expand = function(args)
 						require("luasnip").lsp_expand(args.body)
