@@ -1,5 +1,5 @@
 return {
-    -- Telescope
+	-- Telescope
 	{
 		"nvim-telescope/telescope.nvim",
 		branch = "0.1.x",
@@ -81,7 +81,7 @@ return {
 				end,
 				desc = "Colorscheme with preview",
 			},
-			{ "<leader>sk", "<cmd>Telescope keymaps<cr>", desc = "Key Maps" },
+			-- { "<leader>sk", "<cmd>Telescope keymaps<cr>", desc = "Key Maps" },
 
 			-- git
 			{ "<leader>gb", "<cmd>Telescope git_branches<cr>", desc = "Git branches" },
@@ -124,57 +124,63 @@ return {
 		end,
 	},
 
-    -- Harpoon
-    {
-        "ThePrimeagen/harpoon",
+	-- Harpoon
+	{
+		"ThePrimeagen/harpoon",
 		dependencies = {
 			{
 				"nvim-lua/plenary.nvim",
 			},
-        },
+		},
 		keys = {
-            {
-                ";a",
-                function()
-                    require("harpoon.mark").add_file()
-                end,
-                desc = "Harpoon mark add file",
-            },
-            {
-                "vv",
-                function()
-                    require("harpoon.ui").toggle_quick_menu()
-                end,
-                desc = "Harpoon toggle quick menu",
-            },
-            {
-                "<leader>h",
-                function()
-                    require("harpoon.ui").nav_file(1)
-                end,
-                desc = "Harpoon navigate file 1",
-            },
-            {
-                "<leader>j",
-                function()
-                    require("harpoon.ui").nav_file(2)
-                end,
-                desc = "Harpoon navigate file 2",
-            },
-            {
-                "<leader>k",
-                function()
-                    require("harpoon.ui").nav_file(3)
-                end,
-                desc = "Harpoon navigate file 3",
-            },
-            {
-                "<leader>l",
-                function()
-                    require("harpoon.ui").nav_file(4)
-                end,
-                desc = "Harpoon navigate file 4",
-            },
-        }
-    }
+			{
+				";a",
+				function()
+					require("harpoon.mark").add_file()
+				end,
+				desc = "Harpoon mark add file",
+			},
+			{
+				"vv",
+				function()
+					require("harpoon.ui").toggle_quick_menu()
+				end,
+				desc = "Harpoon toggle quick menu",
+			},
+			{
+				"<leader>h",
+				function()
+					require("harpoon.ui").nav_file(1)
+				end,
+				desc = "Harpoon navigate file 1",
+			},
+			{
+				"<leader>j",
+				function()
+					require("harpoon.ui").nav_file(2)
+				end,
+				desc = "Harpoon navigate file 2",
+			},
+			{
+				"<leader>k",
+				function()
+					require("harpoon.ui").nav_file(3)
+				end,
+				desc = "Harpoon navigate file 3",
+			},
+			{
+				"<leader>l",
+				function()
+					require("harpoon.ui").nav_file(4)
+				end,
+				desc = "Harpoon navigate file 4",
+			},
+		},
+	},
+
+	-- auto pairs
+	{
+		"windwp/nvim-autopairs",
+		event = "InsertEnter",
+	},
 }

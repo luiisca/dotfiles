@@ -56,6 +56,7 @@ return {
 				},
 				formatting = lsp_zero.cmp_format(),
 				mapping = cmp.mapping.preset.insert({
+					["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item
 					["<C-Space>"] = cmp.mapping.complete(),
 					["<C-u>"] = cmp.mapping.scroll_docs(-4),
 					["<C-d>"] = cmp.mapping.scroll_docs(4),
@@ -63,6 +64,10 @@ return {
 					["<C-b>"] = cmp_action.luasnip_jump_backward(),
 				}),
 			})
+
+			-- If you want insert `(` after select function or method item
+			local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+			cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 		end,
 	},
 
@@ -94,7 +99,15 @@ return {
 					lsp_zero.default_setup,
 					lua_ls = function()
 						-- (Optional) Configure lua language server for neovim
-						local lua_opts = lsp_zero.nvim_lua_ls()
+						local lua_opts = lsp_zero.nvim_lua_ls({
+							settings = {
+								Lua = {
+									completion = {
+										callSnippet = "Replace",
+									},
+								},
+							},
+						})
 						require("lspconfig").lua_ls.setup(lua_opts)
 					end,
 				},
