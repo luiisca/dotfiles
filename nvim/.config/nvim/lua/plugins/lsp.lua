@@ -109,6 +109,7 @@ return {
 				-- to learn the available actions
 				lsp_zero.default_keymaps({ buffer = bufnr })
 				vim.keymap.set("n", "gn", vim.lsp.buf.hover, { desc = "LSP buffer" })
+				vim.keymap.set("n", "vd", vim.diagnostic.open_float, { desc = "Open floating diagnostic" })
 			end)
 
 			require("mason-lspconfig").setup({
