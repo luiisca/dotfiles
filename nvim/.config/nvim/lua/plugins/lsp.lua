@@ -108,10 +108,11 @@ return {
 				-- see :help lsp-zero-keybindings
 				-- to learn the available actions
 				lsp_zero.default_keymaps({ buffer = bufnr })
+				vim.keymap.set("n", "gn", vim.lsp.buf.hover, { desc = "LSP buffer" })
 			end)
 
 			require("mason-lspconfig").setup({
-				ensure_installed = { "lua_ls", "tsserver", "rust_analyzer" },
+				ensure_installed = { "lua_ls", "tsserver", "rust_analyzer", "prismals" },
 				handlers = {
 					lsp_zero.default_setup,
 					lua_ls = function()
