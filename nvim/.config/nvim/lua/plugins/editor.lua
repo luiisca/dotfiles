@@ -184,4 +184,15 @@ return {
 		event = "InsertEnter",
 		opts = {},
 	},
+
+	-- Automatically highlights other instances of the word under your cursor.
+	{
+		"RRethy/vim-illuminate",
+		opts = {
+			providers = { "lsp", "treesitter" },
+		},
+		config = function(_, opts)
+			require("illuminate").configure(opts)
+		end,
+	},
 }
