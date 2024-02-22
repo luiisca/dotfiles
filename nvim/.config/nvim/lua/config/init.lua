@@ -20,4 +20,8 @@ require("lazy").setup({
 		-- { "LazyVim/LazyVim", import = "lazyvim.plugins" },
 		{ import = "plugins" },
 	},
+	change_detection = {
+		enabled = true,
+		notify = false,
+	},
 })
