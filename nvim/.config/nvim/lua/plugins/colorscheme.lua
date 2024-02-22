@@ -1,4 +1,4 @@
-function setDynamicBgColor()
+local function setDynamicBgColor()
     local current_hour = tonumber(os.date("%H"))
 
     if current_hour >= 6 and current_hour < 18 then
@@ -10,7 +10,7 @@ end
 
 setDynamicBgColor()
 
-local timer = vim.uv.new_timer()
+local timer = vim.loop.new_timer()
 timer:start(0, 1000 * 60, vim.schedule_wrap(function()
     setDynamicBgColor()
 end))
@@ -19,9 +19,9 @@ end))
 return {
     -- gruvbox
     {
-        'morhetz/gruvbox', 
+        'morhetz/gruvbox',
         priority = 1000,
-        config = function() 
+        config = function()
             vim.cmd.colorscheme("gruvbox")
         end
     },
