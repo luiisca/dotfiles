@@ -23,7 +23,7 @@ sudo pacman -S stow
 3. Use Stow to create symbolic links to the directories that you want to use.
 ```bash
 cd dotfiles
-stow alacritty awesome fish nvim picom rofi rofimoji vifm ...
+stow alacritty awesome fish nvim tmux picom rofi rofimoji vifm ...
 ```
 4. Alternatively, you can manually copy the files to the appropriate locations in your home directory.
 
