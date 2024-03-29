@@ -455,6 +455,7 @@ nnoremap I cw<c-a>
 nnoremap cc cw<c-u>
 nnoremap A cw
 
+
 " Open console in current directory
 nnoremap ,t :!xterm &<cr>
 
@@ -499,4 +500,9 @@ nnoremap <f8> :delete<cr>
 "
 " let $VIFM_SERVER_NAME = v:servername
 
+" ------------------------------------------------------------------------------
+
+" Custom mappings
+nnoremap vv :marks<cr>
+nnoremap % :touch<space>
 
