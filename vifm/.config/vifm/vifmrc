@@ -188,8 +188,8 @@ filextype *.djvu
 filetype *.wav,*.mp3,*.flac,*.m4a,*.wma,*.ape,*.ac3,*.og[agx],*.spx,*.opus
        "\ {Play using ffplay}
        "\ ffplay -nodisp -autoexit %c,
-       \ {Play using Vlc}
-       \ vlc %f,
+       \ {Play using mpv}
+       \ mpv %f &,
 fileviewer *.mp3 mp3info
 fileviewer *.flac soxi
 
@@ -201,8 +201,8 @@ filextype *.avi,*.mp4,*.wmv,*.dat,*.3gp,*.ogv,*.mkv,*.mpg,*.mpeg,*.vob,
         "\ ffplay -fs -autoexit %f,
         "\ {View using Dragon}
         "\ dragon %f:p,
-        \ {View using mpv}
-        \ mpv %f,
+        "\ {View using mpv}
+        \ mpv %c %i &,
 fileviewer *.avi,*.mp4,*.wmv,*.dat,*.3gp,*.ogv,*.mkv,*.mpg,*.mpeg,*.vob,
           \*.fl[icv],*.m2v,*.mov,*.webm,*.ts,*.mts,*.m4v,*.r[am],*.qt,*.divx,
           \*.as[fx]
@@ -505,4 +505,4 @@ nnoremap <f8> :delete<cr>
 " Custom mappings
 nnoremap vv :marks<cr>
 nnoremap % :touch<space>
-
+nnoremap T :!alacritty &<cr>
