@@ -14,23 +14,22 @@ function run {
   fi
 }
 
-run "blueberry-tray"
-run "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
-run "numlockx on"
+# utilities
 run "volumeicon"
-run "syncthing"
-
 run "nitrogen --restore"
 run "redshift -l -12.811801:-79.110661"
 
+# nvim
+alacritty -e tmux &
+
+# vivaldi web browser
+syncthing &
+
+# obsidian
+obsidian &
+
+# spotify
 run "playerctld daemon"
 run "LD_PRELOAD=/usr/local/lib/spotify-adblock.so spotify"
-# run "LD_PRELOAD=/usr/local/lib/spotify-adblock.so spotify --uri=spotify:track:1gwLjpvAbu6IVmVdAfPJ0G"
-# run "LD_PRELOAD=/usr/local/lib/spotify-adblock.so spotify --uri=spotify:playlist:6BGR7tHIUp8CdA6mNzm7l1"
-echo 'ABOUT TO PLAY SONG 🤯'
-sleep 1
-
-# because it shares same process as playerctld which causes run fn to skip it.
-playerctl open spotify:playlist:6BGR7tHIUp8CdA6mNzm7l1 &
-
-# Spotify
+sleep 3
+playerctl open spotify:playlist:5VYkI1tzO63SBD92u7bv2S &

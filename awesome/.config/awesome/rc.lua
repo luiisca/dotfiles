@@ -920,7 +920,10 @@ root.keys(globalkeys)
 
 -- {{{ Rules
 -- Rules to apply to new clients (through the "manage" signal).
-awful.rules.rules = { -- All clients will match this rule.
+local exe_callback_executed = {}
+
+awful.rules.rules = {
+    -- All clients will match this rule.
     {
         rule = {},
         properties = {
@@ -934,7 +937,8 @@ awful.rules.rules = { -- All clients will match this rule.
             placement = awful.placement.no_overlap + awful.placement.no_offscreen,
             size_hints_honor = false,
         },
-    }, -- Titlebars
+    },
+    -- Titlebars
     {
         rule_any = {
             type = { "dialog", "normal" },
@@ -942,130 +946,68 @@ awful.rules.rules = { -- All clients will match this rule.
         properties = {
             titlebars_enabled = false,
         },
-    }, -- Set applications to always map on the tag 2 on screen 1.
-    -- { rule = { class = "Subl" },
-    -- properties = { screen = 1, tag = awful.util.tagnames[2], switchtotag = true  } },
-    -- Set applications to always map on the tag 1 on screen 1.
-    -- find class or role via xprop command
-    -- { rule = { class = browser1 }, properties = { tag = "4" } },
-    -- { rule = { class = browser2 }, properties = { tag = "3", switchtotag = true } },
-    -- { rule = { class = "Vivaldi-stable" },
-    -- properties = { screen = 1, tag = awful.util.tagnames[1], switchtotag = true } },
-    -- { rule = { class = "Chromium" }, properties = { screen = 1, tag = awful.util.tagnames[1], switchtotag = true } },
-    -- { rule = { class = "Opera" },
-    -- properties = { screen = 1, tag = awful.util.tagnames[1],switchtotag = true  } },
-    -- Set applications to always map on the tag 2 on screen 1.
-    -- { rule = { class = "Subl" },
-    -- properties = { screen = 1, tag = awful.util.tagnames[2],switchtotag = true  } },
-    -- { rule = { class = editorgui },
-    -- properties = { screen = 1, tag = awful.util.tagnames[2], switchtotag = true  } },
-    -- { rule = { class = "Brackets" },
-    -- properties = { screen = 1, tag = awful.util.tagnames[2], switchtotag = true  } },
-    -- { rule = { class = "Code" },
-    -- properties = { screen = 1, tag = awful.util.tagnames[2], switchtotag = true  } },
-    --    { rule = { class = "Geany" },
-    --  properties = { screen = 1, tag = awful.util.tagnames[2], switchtotag = true  } },
-    -- Set applications to always map on the tag 3 on screen 1.
-    -- { rule = { class = "Inkscape" },
-    -- properties = { screen = 1, tag = awful.util.tagnames[3], switchtotag = true  } },
-    -- Set applications to always map on the tag 4 on screen 1.
-    -- { rule = { class = "Gimp" },
-    -- properties = { screen = 1, tag = awful.util.tagnames[4], switchtotag = true  } },
-    -- Set applications to always map on the tag 5 on screen 1.
-    -- { rule = { class = "Meld" },
-    -- properties = { screen = 1, tag = awful.util.tagnames[5] , switchtotag = true  } },
-    -- Set applications to be maximized at startup.
-    -- find class or role via xprop command
-    -- { rule = { class = "Thunar" },
-    --     properties = { maximized = false, floating = false } },
+    },
+    -- Programs
+    {
+        rule = {
+            class = 'Alacritty',
+        },
+        properties = {
+            exe_callback = function(c)
+                if not exe_callback_executed[c.class] then
+                    c.fullscreen = true
+
+                    exe_callback_executed[c.class] = true
+                end
+            end,
+        },
+    },
+    {
+        rule = {
+            class = 'Vivaldi-stable',
+        },
+        properties = {
+            exe_callback = function(c)
+                if not exe_callback_executed[c.class] then
+                    c:move_to_tag(screen[1].tags[2])
+                    c.fullscreen = true
+
+                    exe_callback_executed[c.class] = true
+                end
+            end,
+        }
+    },
+    {
+        rule = {
+            class = 'obsidian',
+        },
+        properties = {
+            exe_callback = function(c)
+                if not exe_callback_executed[c.class] then
+                    c:move_to_tag(screen[1].tags[3])
+                    c.fullscreen = true
+
+                    exe_callback_executed[c.class] = true
+                end
+            end,
+        }
+    },
     {
         rule = {
             class = mediaplayer,
         },
         properties = {
-            tag = "2",
+            exe_callback = function(c)
+                c:move_to_tag(screen[1].tags[4])
+                gears.timer.start_new(2, function()
+                    if not exe_callback_executed[c.class] then
+                        c.minimized = true
+                    end
+                    exe_callback_executed[c.class] = true
+                end)
+            end,
         },
-    }, -- { rule = { class = "vlc" }, properties = { maximized = true } },
-    -- { rule = { class = "VirtualBox Manager" },
-    --       properties = { maximized = true } },
-    --
-    -- { rule = { class = "VirtualBox Machine" },
-    --       properties = { maximized = true } },
-    --    { rule = { class = "Vivaldi-stable" },
-    --          properties = { maximized = false, floating = false } },
-    --    { rule = { class = "Vivaldi-stable" },
-    --          properties = { callback = function (c) c.maximized = false end } },
-    -- IF using Vivaldi snapshot you must comment out the rules above for Vivaldi-stable as they conflict
-    --    { rule = { class = "Vivaldi-snapshot" },
-    --          properties = { maximized = false, floating = false } },
-    --    { rule = { class = "Vivaldi-snapshot" },
-    --          properties = { callback = function (c) c.maximized = false end } },
-    {
-        rule = {
-            class = "Xfce4-settings-manager",
-        },
-        properties = {
-            tag = "4",
-            switchtotag = true,
-            maximized = false,
-            floating = false,
-        },
-    }, -- Floating clients.
-    -- {
-    -- 	rule_any = {
-    -- 		instance = {
-    -- 			"DTA", -- Firefox addon DownThemAll.
-    -- 			"copyq", -- Includes session name in class.
-    -- 		},
-    -- 		class = {
-    -- 			"Arandr",
-    -- 			"Arcolinux-welcome-app.py",
-    -- 			"Blueberry",
-    -- 			"Galculator",
-    -- 			"Gnome-font-viewer",
-    -- 			"Gpick",
-    -- 			"Imagewriter",
-    -- 			"Font-manager",
-    -- 			"Kruler",
-    -- 			"MessageWin", -- kalarm.
-    -- 			"archlinux-logout",
-    -- 			"Peek",
-    -- 			"Skype",
-    -- 			"System-config-printer.py",
-    -- 			"Sxiv",
-    -- 			"Unetbootin.elf",
-    -- 			"Wpa_gui",
-    -- 			"pinentry",
-    -- 			"veromix",
-    -- 			"xtightvncviewer",
-    -- 			"Xfce4-terminal",
-    -- 		},
-    --
-    -- 		name = {
-    -- 			"Event Tester", -- xev.
-    -- 		},
-    -- 		role = {
-    -- 			"AlarmWindow", -- Thunderbird's calendar.
-    -- 			"pop-up", -- e.g. Google Chrome's (detached) Developer Tools.
-    -- 			"Preferences",
-    -- 			"setup",
-    -- 		},
-    -- 	},
-    -- 	properties = { floating = true },
-    -- },
-    -- Floating clients but centered in screen
-    -- {
-    -- 	rule_any = {
-    -- 		class = {
-    -- 			"Polkit-gnome-authentication-agent-1",
-    -- 			"Arcolinux-calamares-tool.py",
-    -- 		},
-    -- 	},
-    -- 	properties = { floating = true },
-    -- 	callback = function(c)
-    -- 		awful.placement.centered(c, nil)
-    -- 	end,
-    -- },
+    },
 }
 -- }}}
 
