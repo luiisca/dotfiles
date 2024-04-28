@@ -128,6 +128,7 @@ return {
     -- Harpoon
     {
         "ThePrimeagen/harpoon",
+        branch = "harpoon2",
         dependencies = {
             {
                 "nvim-lua/plenary.nvim",
@@ -256,4 +257,107 @@ return {
             })
         end
     },
+
+    -- zen-mode
+    {
+        "folke/zen-mode.nvim"
+    },
+
+    -- vinegar
+    {
+        "tpope/vim-vinegar"
+    },
+
+    -- AI
+    {
+        "Exafunction/codeium.vim",
+        event = 'BufEnter',
+        config = function()
+            vim.g.codeium_no_map_tab = 1
+            vim.keymap.set('i', '<A-g>', function() return vim.fn['codeium#Accept']() end,
+                { expr = true, silent = true, desc = 'codeium accept' })
+            vim.keymap.set('i', '<A-r>', function() return vim.fn['codeium#Clear']() end,
+                { expr = true, silent = true, desc = 'codeium clear' })
+        end
+    }
+    -- nvim-tree
+    -- {
+    --     "nvim-tree/nvim-tree.lua",
+    --     dependencies = "nvim-tree/nvim-web-devicons",
+    --     opts = {
+    --         hijack_cursor = true,
+    --         update_focused_file = {
+    --             enable = true,
+    --             update_root = true,
+    --         },
+    --         renderer = {
+    --             highlight_opened_files = "all",     -- 'none', 'icon', 'name', 'all'
+    --             root_folder_label = ":t",
+    --             icons = {
+    --                 glyphs = {
+    --                     default = "",
+    --                     symlink = "",
+    --                     folder = {
+    --                         arrow_open = "",
+    --                         arrow_closed = "",
+    --                         default = "",
+    --                         open = "",
+    --                         empty = "",
+    --                         empty_open = "",
+    --                         symlink = "",
+    --                         symlink_open = "",
+    --                     },
+    --                     git = {
+    --                         unstaged = "",
+    --                         staged = "S",
+    --                         unmerged = "",
+    --                         renamed = "➜",
+    --                         untracked = "U",
+    --                         deleted = "",
+    --                         ignored = "◌",
+    --                     },
+    --                 },
+    --             },
+    --         },
+    --         diagnostics = {
+    --             enable = true,
+    --             show_on_dirs = true,
+    --             icons = {
+    --                 hint = "",
+    --                 info = "",
+    --                 warning = "",
+    --                 error = "",
+    --             },
+    --         },
+    --         view = {
+    --             centralize_selection = true,
+    --             width = 40,
+    --             number = true,
+    --             relativenumber = true,
+    --
+    --             -- mappings = {
+    --             --     list = {
+    --             --         -- { key = { "l", "<CR>", "o" }, cb = tree_cb "edit" },
+    --             --         -- { key = "H",                  cb = tree_cb "close_node" },
+    --             --         -- { key = "v",                  cb = tree_cb "vsplit" },
+    --             --         { key = "h",    action = "dir_up" },
+    --             --         { key = "s",    action = "" },
+    --             --         { key = "<CR>", action = "edit_in_place" }
+    --             --     },
+    --             -- },
+    --
+    --         },
+    --         filters = {
+    --             custom = { "^.git$" }
+    --         },
+    --         actions = {
+    --             open_file = {
+    --                 quit_on_open = true,
+    --             },
+    --             remove_file = {
+    --                 close_window = false,
+    --             }
+    --         },
+    --     }
+    -- }
 }
