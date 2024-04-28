@@ -1,11 +1,11 @@
 vim.g.mapleader = " "
 
 local function bind(op, outer_opts)
-	outer_opts = outer_opts or { noremap = true }
-	return function(lhs, rhs, opts)
-		opts = vim.tbl_extend("force", outer_opts, opts or {})
-		vim.keymap.set(op, lhs, rhs, opts)
-	end
+    outer_opts = outer_opts or { noremap = true }
+    return function(lhs, rhs, opts)
+        opts = vim.tbl_extend("force", outer_opts, opts or {})
+        vim.keymap.set(op, lhs, rhs, opts)
+    end
 end
 
 local nnoremap = bind("n")
@@ -14,6 +14,11 @@ local xnoremap = bind("x")
 local inoremap = bind("i")
 
 local opts = { silent = true }
+
+-- NVIM-TREE
+-- nnoremap('sf', '<cmd>lua require("nvim-tree.api").tree.open({ winid = vim.api.nvim_get_current_win() })<cr>',
+--     { desc = "Nvim-tree Explorer" })
+-- nnoremap(';sf', '<cmd>silent :NvimTreeToggle<cr>', { desc = "Toggle Nvim-tree Explorer to the side" })
 
 -- COMMANDS
 nnoremap("sf", vim.cmd.Ex, { desc = "Explorer" })
@@ -24,7 +29,7 @@ nnoremap("<leader>g", "<cmd>nohlsearch<CR>", { silent = true, desc = "Clear high
 nnoremap("<leader>o", ":only<CR>", { desc = "Focus buffer" })
 nnoremap("<leader>x", "<cmd>!chmod +x %<CR>", { silent = true, desc = "Make current file executable" })
 nnoremap("<leader><leader>", function()
-	vim.cmd("so")
+    vim.cmd("so")
 end, { desc = "Move to latest file" })
 
 -- MOVE LINES
@@ -102,3 +107,5 @@ vnoremap("y", "y`]")
 vnoremap("p", "p`]")
 
 nnoremap("Q", "<nop>", { desc = "Macro recording is disabled" })
+
+inoremap("<A-,>", "<BS>", { desc = "Delete char before cursor" })
