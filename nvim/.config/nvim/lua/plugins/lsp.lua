@@ -110,6 +110,10 @@ return {
                 lsp_zero.default_keymaps({ buffer = bufnr })
 
                 vim.keymap.set("n", "gn", vim.lsp.buf.hover, { desc = "LSP buffer" })
+                -- vim.keymap.set("n", "gv", vim.lsp.buf.references, { desc = "LSP references" })
+                vim.keymap.set("n", "gv", function()
+                    require("telescope.builtin").lsp_references({ reuse_win = true })
+                end, { desc = "LSP references" })
                 vim.keymap.set("n", "vd", vim.diagnostic.open_float, { desc = "Open floating diagnostic" })
                 vim.keymap.set("n", "gd", function()
                     require("telescope.builtin").lsp_definitions({ reuse_win = true })
