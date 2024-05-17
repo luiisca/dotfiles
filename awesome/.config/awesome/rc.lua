@@ -79,6 +79,9 @@ local function run_once(cmd_arr)
         awful.spawn.with_shell(string.format("pgrep -u $USER -fx '%s' > /dev/null || (%s)", cmd, cmd))
     end
 end
+local function case_insensitive_match(str, pattern)
+    return string.match(string.lower(str), string.lower(pattern)) ~= nil
+end
 
 run_once({ "unclutter -root" }) -- entries must be comma-separated
 
@@ -921,6 +924,7 @@ root.keys(globalkeys)
 -- {{{ Rules
 -- Rules to apply to new clients (through the "manage" signal).
 local exe_callback_executed = {}
+local clients_positioned = {}
 
 awful.rules.rules = {
     -- All clients will match this rule.
@@ -968,11 +972,52 @@ awful.rules.rules = {
         },
         properties = {
             exe_callback = function(c)
-                if not exe_callback_executed[c.class] then
-                    c:move_to_tag(screen[1].tags[2])
-                    c.fullscreen = true
+                Signal = function()
+                    local linear_matched = case_insensitive_match(c.name, 'linear')
+                    local chatgpt_matched = case_insensitive_match(c.name, 'chatgpt')
 
-                    exe_callback_executed[c.class] = true
+                    if linear_matched then
+                        -- naughty.notify({
+                        --     preset = naughty.config.presets.critical,
+                        --     title = "Linear",
+                        --     text = tostring(c.window),
+                        -- })
+                        c:move_to_tag(screen[1].tags[3])
+                        clients_positioned[c.window] = true
+                        local cmd = "xdotool windowfocus " .. tostring(c.window) .. "; xdotool key F11"
+
+                        -- naughty.notify({
+                        --     preset = naughty.config.presets.critical,
+                        --     title = "cmd",
+                        --     text = tostring(cmd),
+                        -- })
+                        -- awful.spawn.with_shell("xdotool windowfocus " .. tostring(c.window) .. "; xdotool key F11")
+
+                        c:disconnect_signal("property::name", Signal)
+                    elseif chatgpt_matched then
+                        c:move_to_tag(screen[1].tags[4])
+                        clients_positioned[c.window] = true
+                        -- awful.spawn.with_shell("xdotool windowfocus " .. tostring(c.window) .. "; xdotool key F11")
+
+                        c:disconnect_signal("property::name", Signal)
+                    end
+                end
+
+                local clients_positioned_count = 0
+                for _ in pairs(clients_positioned) do
+                    clients_positioned_count = clients_positioned_count + 1
+                end
+                if clients_positioned_count >= 2 then
+                    if clients_positioned_count == 2 then
+                        c:move_to_tag(screen[1].tags[2])
+                    end
+                else
+                    -- naughty.notify({
+                    --     preset = naughty.config.presets.critical,
+                    --     title = "Vivaldi",
+                    --     text = tostring(c.window),
+                    -- })
+                    c:connect_signal("property::name", Signal)
                 end
             end,
         }
@@ -1010,7 +1055,7 @@ awful.rules.rules = {
     },
 }
 -- }}}
-
+--
 -- {{{ Signals
 -- Signal function to execute when a new client appears.
 client.connect_signal("manage", function(c)
