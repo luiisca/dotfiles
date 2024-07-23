@@ -120,6 +120,9 @@ return {
                             ["q"] = actions.close,
                         },
                     },
+                    path_display = {
+                        shorten = { len = 3, exclude = { 1, -1 } }
+                    }
                 },
             }
         end,
