@@ -20,10 +20,10 @@ return {
     -- gruvbox
     {
         'morhetz/gruvbox',
-        priority = 1000,
-        config = function()
-            vim.cmd.colorscheme("gruvbox")
-        end
+        -- priority = 1000,
+        -- config = function()
+        --     vim.cmd.colorscheme("gruvbox")
+        -- end
     },
 
     -- kanagawa
@@ -39,5 +39,13 @@ return {
     -- everforest
     {
         "sainnhe/everforest",
+    },
+
+    -- monokai-pro
+    {
+        "loctvl842/monokai-pro.nvim",
+        config = function()
+            vim.cmd.colorscheme('monokai-pro')
+        end
     }
 }
