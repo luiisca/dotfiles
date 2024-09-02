@@ -364,7 +364,7 @@ globalkeys = my_table.join( -- {{{ Personal keybindings
         group = "super",
     }),
     awful.key({ modkey }, "x", function()
-        awful.util.spawn("archlinux-logout")
+        awful.spawn.with_shell("~/.config/awesome/exit.sh")
     end, {
         description = "exit",
         group = "hotkeys",
