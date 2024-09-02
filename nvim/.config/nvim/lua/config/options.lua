@@ -2,6 +2,7 @@
 vim.opt.nu = true                       -- line number
 vim.opt.relativenumber = true           -- relative line number
 vim.opt.fillchars:append({ eob = " " }) -- show empty lines at the end of a buffer as ` ` {default `~`}
+vim.opt.signcolumn = 'no'
 
 -- Text
 vim.opt.tabstop = 4
@@ -41,3 +42,9 @@ vim.opt.scrolloff = 8   -- never less than 8 lines above or below cursor
 vim.opt.sidescrolloff = 15
 vim.opt.sidescroll = 5
 vim.opt.isfname:append("@-@")
+
+-- Netrw
+-- disable netrw at the very start of your init.lua
+-- vim.g.loaded_netrw = 1
+-- vim.g.loaded_netrwPlugin = 1
+-- vim.g.netrw_banner = 0
