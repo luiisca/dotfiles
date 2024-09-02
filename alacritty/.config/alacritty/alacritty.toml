@@ -1,0 +1,174 @@
+# [window]
+# opacity = 0.95
+
+[env]
+TERM = "xterm-256color"
+
+[font]
+size = 12.0
+
+[font.bold]
+family = "FiraCode Nerd Font Mono"
+style = "Bold"
+
+[font.bold_italic]
+family = "FiraCode Nerd Font"
+style = "Bold"
+
+[font.italic]
+family = "FiraCode Nerd Font Mono"
+style = "Regular"
+
+[font.normal]
+family = "FiraCode Nerd Font Mono"
+style = "Regular"
+
+# everforest dark hard
+[colors.bright]
+black = "#4b565c"
+blue = "#7fbbb3"
+cyan = "#83c092"
+green = "#a7c080"
+magenta = "#d699b6"
+red = "#e67e80"
+white = "#d3c6aa"
+yellow = "#dbbc7f"
+
+[colors.normal]
+black = "#4b565c"
+blue = "#7fbbb3"
+cyan = "#83c092"
+green = "#a7c080"
+magenta = "#d699b6"
+red = "#e67e80"
+white = "#d3c6aa"
+yellow = "#dbbc7f"
+
+[colors.primary]
+background = "#272e33"
+foreground = "#d3c6aa"
+
+# everforest dark medium
+# [colors.bright]
+# black = "#4b565c"
+# blue = "#7fbbb3"
+# cyan = "#83c092"
+# green = "#a7c080"
+# magenta = "#d699b6"
+# red = "#e67e80"
+# white = "#d3c6aa"
+# yellow = "#dbbc7f"
+#
+# [colors.normal]
+# black = "#4b565c"
+# blue = "#7fbbb3"
+# cyan = "#83c092"
+# green = "#a7c080"
+# magenta = "#d699b6"
+# red = "#e67e80"
+# white = "#d3c6aa"
+# yellow = "#dbbc7f"
+#
+# [colors.primary]
+# background = "#2f383e"
+# foreground = "#d3c6aa"
+
+# everforest dark soft
+# [colors.bright]
+# black = "#4b565c"
+# blue = "#7fbbb3"
+# cyan = "#83c092"
+# green = "#a7c080"
+# magenta = "#d699b6"
+# red = "#e67e80"
+# white = "#d3c6aa"
+# yellow = "#dbbc7f"
+#
+# [colors.normal]
+# black = "#4b565c"
+# blue = "#7fbbb3"
+# cyan = "#83c092"
+# green = "#a7c080"
+# magenta = "#d699b6"
+# red = "#e67e80"
+# white = "#d3c6aa"
+# yellow = "#dbbc7f"
+#
+# [colors.primary]
+# background = "#323d43"
+# foreground = "#d3c6aa"
+
+# everforest light hard
+# [colors.bright]
+# black = "#5c6a72"
+# blue = "#3a94c5"
+# cyan = "#35a77c"
+# green = "#8da101"
+# magenta = "#df69ba"
+# red = "#f85552"
+# white = "#dfddc8"
+# yellow = "#dfa000"
+#
+# [colors.normal]
+# black = "#5c6a72"
+# blue = "#3a94c5"
+# cyan = "#35a77c"
+# green = "#8da101"
+# magenta = "#df69ba"
+# red = "#f85552"
+# white = "#dfddc8"
+# yellow = "#dfa000"
+#
+# [colors.primary]
+# background = "#fff9e8"
+# foreground = "#5c6a72"
+
+# everforest light medium
+# [colors.bright]
+# black = "#5c6a72"
+# blue = "#3a94c5"
+# cyan = "#35a77c"
+# green = "#8da101"
+# magenta = "#df69ba"
+# red = "#f85552"
+# white = "#dfddc8"
+# yellow = "#dfa000"
+#
+# [colors.normal]
+# black = "#5c6a72"
+# blue = "#3a94c5"
+# cyan = "#35a77c"
+# green = "#8da101"
+# magenta = "#df69ba"
+# red = "#f85552"
+# white = "#dfddc8"
+# yellow = "#dfa000"
+#
+# [colors.primary]
+# background = "#fdf6e3"
+# foreground = "#5c6a72"
+
+# everforest light soft
+# [colors.bright]
+# black = "#5c6a72"
+# blue = "#3a94c5"
+# cyan = "#35a77c"
+# green = "#8da101"
+# magenta = "#df69ba"
+# red = "#f85552"
+# white = "#dfddc8"
+# yellow = "#dfa000"
+#
+# [colors.normal]
+# black = "#5c6a72"
+# blue = "#3a94c5"
+# cyan = "#35a77c"
+# green = "#8da101"
+# magenta = "#df69ba"
+# red = "#f85552"
+# white = "#dfddc8"
+# yellow = "#dfa000"
+#
+# [colors.primary]
+# background = "#f8f0dc"
+# foreground = "#5c6a72"
