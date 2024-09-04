@@ -282,6 +282,15 @@ return {
             vim.keymap.set('i', '<A-r>', function() return vim.fn['codeium#Clear']() end,
                 { expr = true, silent = true, desc = 'codeium clear' })
         end
+    },
+    {
+        "lewis6991/gitsigns.nvim",
+        config = function()
+            require("gitsigns").setup()
+        end,
+    },
+    {
+        "Pocco81/auto-save.nvim"
     }
     -- nvim-tree
     -- {
