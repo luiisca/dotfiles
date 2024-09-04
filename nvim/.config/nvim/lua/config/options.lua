@@ -2,7 +2,7 @@
 vim.opt.nu = true                       -- line number
 vim.opt.relativenumber = true           -- relative line number
 vim.opt.fillchars:append({ eob = " " }) -- show empty lines at the end of a buffer as ` ` {default `~`}
-vim.opt.signcolumn = 'no'
+-- vim.opt.signcolumn = 'no'
 
 -- Text
 vim.opt.tabstop = 4
