@@ -23,6 +23,7 @@ return {
                 "rust",
                 "typescript",
                 "tsx",
+                "svelte",
                 "yaml",
                 "vimdoc",
                 "markdown_inline",

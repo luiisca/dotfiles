@@ -122,6 +122,19 @@ return {
                 vim.keymap.set("n", "gd", function()
                     require("telescope.builtin").lsp_definitions({ reuse_win = true })
                 end, { desc = "Goto Definition" })
+                vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { buffer = bufnr, desc = "Code actions" })
+                -- organize imports
+                vim.keymap.set("n", "<leader>ooi", function()
+                    vim.lsp.buf.code_action({ context = { only = { "source.organizeImports" } } })
+                end, { buffer = bufnr, desc = "Organize Imports" })
+                vim.keymap.set("n", "<leader>oi", function()
+                    local params = {
+                        command = "_typescript.organizeImports",
+                        arguments = { vim.api.nvim_buf_get_name(0) },
+                        title = ""
+                    }
+                    vim.lsp.buf.execute_command(params)
+                end, { buffer = bufnr, desc = "Organize ts Imports" })
             end)
             lsp_zero.set_server_config({
                 single_file_support = false,
