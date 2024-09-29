@@ -56,14 +56,15 @@ run "nitrogen --restore"
 run "redshift -P -O 2800"
 
 # nvim
-# alacritty -e tmux &
+alacritty -e tmux &
 
 # vivaldi web browser
-vivaldi --new-window "https://linear.app" &   # Linear app
-sleep 2
-vivaldi --new-window "https://chatgpt.com" &  # ChatGPT
-sleep 2
+# TODO: two instances of linear and claude are opened for some reason sometimes
 vivaldi &  # General browsing
+sleep 2
+vivaldi --new-window "https://linear.app" &
+sleep 2
+vivaldi --new-window "https://claude.ai/new" &
 syncthing --no-browser &
 
 # obsidian
@@ -73,4 +74,5 @@ obsidian &
 run "playerctld daemon"
 run "LD_PRELOAD=/usr/local/lib/spotify-adblock.so spotify"
 sleep 60
-playerctl open spotify:playlist:5VYkI1tzO63SBD92u7bv2S &
+playerctl open spotify:playlist:37i9dQZF1DWVqfgj8NZEp1 &
+playerctl volume 0.35 &
