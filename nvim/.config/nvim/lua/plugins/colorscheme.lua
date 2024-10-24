@@ -44,8 +44,13 @@ return {
     -- monokai-pro
     {
         "loctvl842/monokai-pro.nvim",
+    },
+
+    -- melange
+    {
+        "savq/melange-nvim",
         config = function()
-            vim.cmd.colorscheme('monokai-pro')
+            vim.cmd.colorscheme('melange')
         end
     }
 }
