@@ -149,7 +149,7 @@ return {
             })
 
             require("mason-lspconfig").setup({
-                ensure_installed = { "lua_ls", "tsserver", "rust_analyzer", "prismals", "kotlin_language_server", "svelte" },
+                ensure_installed = { "lua_ls", "ts_ls", "rust_analyzer", "prismals", "kotlin_language_server", "svelte" },
                 handlers = {
                     lsp_zero.default_setup,
                     lua_ls = function()
