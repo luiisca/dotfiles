@@ -31,6 +31,7 @@ nnoremap("<leader>x", "<cmd>!chmod +x %<CR>", { silent = true, desc = "Make curr
 nnoremap("<leader><leader>", function()
     vim.cmd("so")
 end, { desc = "Move to latest file" })
+nnoremap("<leader>b", ":edit ~/", { desc = "Open home dir" })
 
 -- MOVE LINES
 vnoremap("J", ":m '>+1<CR>gv=gv")
