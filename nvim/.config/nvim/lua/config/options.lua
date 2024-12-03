@@ -16,6 +16,7 @@ vim.opt.wrap = false
 vim.opt.startofline = true -- Jump to first non-blank character
 
 vim.opt.updatetime = 50    -- CursorHold autocommand will run after this ms if no new key is pressed, used by some plugins
+vim.opt.cursorline = true
 
 -- File
 vim.opt.swapfile = false

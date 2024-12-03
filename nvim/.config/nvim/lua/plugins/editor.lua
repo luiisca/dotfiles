@@ -1,3 +1,5 @@
+local detail = false
+
 return {
     -- Telescope
     {
@@ -267,8 +269,33 @@ return {
     },
 
     -- vinegar
+    -- {
+    --     "tpope/vim-vinegar"
+    -- },
+
+    -- oil
     {
-        "tpope/vim-vinegar"
+        'stevearc/oil.nvim',
+        ---@module 'oil'
+        ---@type oil.SetupOpts
+        opts = {
+            keymaps = {
+                ["gn"] = {
+                    desc = "Toggle file detail view",
+                    callback = function()
+                        detail = not detail
+                        if detail then
+                            require("oil").set_columns({ "icon", "permissions", "size", "mtime" })
+                        else
+                            require("oil").set_columns({ "icon" })
+                        end
+                    end,
+                },
+            },
+        },
+        -- Optional dependencies
+        -- dependencies = { { "echasnovski/mini.icons", opts = {} } },
+        dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if prefer nvim-web-devicons
     },
 
     -- AI
@@ -291,85 +318,17 @@ return {
     },
     {
         "Pocco81/auto-save.nvim"
+    },
+
+    -- vimtex
+    {
+        "lervag/vimtex",
+        lazy = false, -- we don't want to lazy load VimTeX
+        init = function()
+            -- VimTeX configuration goes here, e.g.
+            vim.g.tex_flavor = "latex"
+            vim.g.vimtex_view_method = "zathura"
+            -- vim.g.vimtex_quickfix_mode = 0
+        end
     }
-    -- nvim-tree
-    -- {
-    --     "nvim-tree/nvim-tree.lua",
-    --     dependencies = "nvim-tree/nvim-web-devicons",
-    --     opts = {
-    --         hijack_cursor = true,
-    --         update_focused_file = {
-    --             enable = true,
-    --             update_root = true,
-    --         },
-    --         renderer = {
-    --             highlight_opened_files = "all",     -- 'none', 'icon', 'name', 'all'
-    --             root_folder_label = ":t",
-    --             icons = {
-    --                 glyphs = {
-    --                     default = "",
-    --                     symlink = "",
-    --                     folder = {
-    --                         arrow_open = "",
-    --                         arrow_closed = "",
-    --                         default = "",
-    --                         open = "",
-    --                         empty = "",
-    --                         empty_open = "",
-    --                         symlink = "",
-    --                         symlink_open = "",
-    --                     },
-    --                     git = {
-    --                         unstaged = "",
-    --                         staged = "S",
-    --                         unmerged = "",
-    --                         renamed = "➜",
-    --                         untracked = "U",
-    --                         deleted = "",
-    --                         ignored = "◌",
-    --                     },
-    --                 },
-    --             },
-    --         },
-    --         diagnostics = {
-    --             enable = true,
-    --             show_on_dirs = true,
-    --             icons = {
-    --                 hint = "",
-    --                 info = "",
-    --                 warning = "",
-    --                 error = "",
-    --             },
-    --         },
-    --         view = {
-    --             centralize_selection = true,
-    --             width = 40,
-    --             number = true,
-    --             relativenumber = true,
-    --
-    --             -- mappings = {
-    --             --     list = {
-    --             --         -- { key = { "l", "<CR>", "o" }, cb = tree_cb "edit" },
-    --             --         -- { key = "H",                  cb = tree_cb "close_node" },
-    --             --         -- { key = "v",                  cb = tree_cb "vsplit" },
-    --             --         { key = "h",    action = "dir_up" },
-    --             --         { key = "s",    action = "" },
-    --             --         { key = "<CR>", action = "edit_in_place" }
-    --             --     },
-    --             -- },
-    --
-    --         },
-    --         filters = {
-    --             custom = { "^.git$" }
-    --         },
-    --         actions = {
-    --             open_file = {
-    --                 quit_on_open = true,
-    --             },
-    --             remove_file = {
-    --                 close_window = false,
-    --             }
-    --         },
-    --     }
-    -- }
 }

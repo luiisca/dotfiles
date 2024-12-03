@@ -21,7 +21,7 @@ local opts = { silent = true }
 -- nnoremap(';sf', '<cmd>silent :NvimTreeToggle<cr>', { desc = "Toggle Nvim-tree Explorer to the side" })
 
 -- COMMANDS
-nnoremap("sf", vim.cmd.Ex, { desc = "Explorer" })
+nnoremap("sf", vim.cmd.Oil, { desc = "Explorer" })
 nnoremap("<leader>s", vim.cmd.w, { desc = "Save" })
 nnoremap("<leader>q", ":x<CR>")
 inoremap("jk", "<ESC>", { silent = true, desc = "Escape" })
