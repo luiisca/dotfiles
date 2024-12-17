@@ -53,10 +53,11 @@ connect_bluetooth_earbuds &
 # utilities
 run "volumeicon"
 run "nitrogen --restore"
-run "redshift -P -O 2800"
+run "redshift -P -O 3000"
+run "warpd"
 
 # nvim
-alacritty -e tmux &
+alacritty -e tmux a &
 
 # vivaldi web browser
 # TODO: two instances of linear and claude are opened for some reason sometimes
