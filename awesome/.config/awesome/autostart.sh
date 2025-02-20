@@ -48,7 +48,7 @@ function connect_bluetooth_earbuds {
     connect_with_retry
 }
 
-connect_bluetooth_earbuds &
+# connect_bluetooth_earbuds &
 
 # utilities
 run "volumeicon"
@@ -57,15 +57,8 @@ run "redshift -P -O 3000"
 run "warpd"
 
 # nvim
-alacritty -e tmux a &
+alacritty -e tmux &
 
-# vivaldi web browser
-# TODO: two instances of linear and claude are opened for some reason sometimes
-vivaldi &  # General browsing
-sleep 2
-vivaldi --new-window "https://linear.app" &
-sleep 2
-vivaldi --new-window "https://claude.ai/new" &
 syncthing --no-browser &
 
 # obsidian
@@ -74,6 +67,6 @@ obsidian &
 # spotify
 run "playerctld daemon"
 run "LD_PRELOAD=/usr/local/lib/spotify-adblock.so spotify"
-sleep 60
+sleep 30
 playerctl open spotify:playlist:37i9dQZF1DWVqfgj8NZEp1 &
 playerctl volume 0.35 &

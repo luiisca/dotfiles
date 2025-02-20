@@ -83,48 +83,48 @@ end
 run_once({ "unclutter -root" }) -- entries must be comma-separated
 
 -- {{{ Vivaldi autostart helpers
-local function case_insensitive_match(str, pattern)
-    return string.match(string.lower(str), string.lower(pattern))
-end
+-- local function case_insensitive_match(str, pattern)
+--     return string.match(string.lower(str), string.lower(pattern))
+-- end
 -- Table to track positioned clients
-local clients_positioned = {}
+-- local clients_positioned = {}
 
 -- Function to handle window positioning and fullscreen
-local function position_window(c, tag_index, go_fullscreen)
-    -- naughty.notify({
-    --     preset = naughty.config.presets.critical,
-    --     title = "[position_window] c.name",
-    --     text = c.name .. " " .. tag_index,
-    -- })
-    if not clients_positioned[c.name] then
-        -- naughty.notify({
-        --     preset = naughty.config.presets.critical,
-        --     title = "[position_window] about to move c.name",
-        --     text = c.name .. " " .. tag_index,
-        -- })
-        c:move_to_tag(screen[1].tags[tag_index])
-        clients_positioned[c.name] = true
-
-        -- Delay the fullscreen command slightly
-        if go_fullscreen then
-            gears.timer.start_new(0.5, function()
-                awful.spawn.with_shell("xdotool windowactivate " .. tostring(c.window) .. " && xdotool key F11")
-            end)
-        end
-    end
-end
+-- local function position_window(c, tag_index, go_fullscreen)
+--     -- naughty.notify({
+--     --     preset = naughty.config.presets.critical,
+--     --     title = "[position_window] c.name",
+--     --     text = c.name .. " " .. tag_index,
+--     -- })
+--     if not clients_positioned[c.name] then
+--         -- naughty.notify({
+--         --     preset = naughty.config.presets.critical,
+--         --     title = "[position_window] about to move c.name",
+--         --     text = c.name .. " " .. tag_index,
+--         -- })
+--         c:move_to_tag(screen[1].tags[tag_index])
+--         clients_positioned[c.name] = true
+--
+--         -- Delay the fullscreen command slightly
+--         if go_fullscreen then
+--             gears.timer.start_new(0.5, function()
+--                 awful.spawn.with_shell("xdotool windowactivate " .. tostring(c.window) .. " && xdotool key F11")
+--             end)
+--         end
+--     end
+-- end
 
 -- Function to ensure window is accessible after going fullscreen
-local function ensure_window_accessible(c)
-    c:connect_signal("property::fullscreen", function()
-        if c.fullscreen then
-            gears.timer.start_new(0.1, function()
-                awful.client.focus.history.add(c)
-                return false
-            end)
-        end
-    end)
-end
+-- local function ensure_window_accessible(c)
+--     c:connect_signal("property::fullscreen", function()
+--         if c.fullscreen then
+--             gears.timer.start_new(0.1, function()
+--                 awful.client.focus.history.add(c)
+--                 return false
+--             end)
+--         end
+--     end)
+-- end
 
 -- Flags to track if Claude and Linear have been positioned
 local claude_positioned = false
@@ -748,18 +748,18 @@ globalkeys = my_table.join( -- {{{ Personal keybindings
     -- awful.key({ altkey, }, "w", function () if beautiful.weather then beautiful.weather.show(7) end end,
     -- {description = "show weather", group = "widgets"}),
 
-    -- @TODO: setup backlight
     -- Brightness
-    awful.key({}, "XF86MonBrightnessUp", function()
+    awful.key({ modkey, altkey }, "=", function()
         os.execute("xbacklight -inc 10")
+        awful.spawn.with_shell("~/.config/awesome/brightness-control.sh up")
     end, {
-        description = "+10%",
+        description = "Brightness +5%",
         group = "hotkeys",
     }),
-    awful.key({}, "XF86MonBrightnessDown", function()
-        os.execute("xbacklight -dec 10")
+    awful.key({ modkey, altkey }, "-", function()
+        awful.spawn.with_shell("~/.config/awesome/brightness-control.sh down")
     end, {
-        description = "-10%",
+        description = "Brightness -5%",
         group = "hotkeys",
     }),
 
@@ -1015,71 +1015,71 @@ awful.rules.rules = {
             class = 'Vivaldi-stable',
         },
         properties = {
-            callback = function(c)
-                local function handle_name_change()
-                    if case_insensitive_match(c.name, 'linear') then
-                        position_window(c, 2, true)
-                        ensure_window_accessible(c)
-                        linear_positioned = true
-                    elseif case_insensitive_match(c.name, 'claude') then
-                        position_window(c, 4, true)
-                        ensure_window_accessible(c)
-                        claude_positioned = true
-                    else
-                        -- For any other tab, position it to tag 2
-                        position_window(c, 2, false)
-                    end
-
-                    -- Check if both Claude and Linear have been positioned
-                    if claude_positioned and linear_positioned then
-                        return true -- Signal to disconnect
-                    end
-                    return false
-                end
-
-                -- Flag to track if we should allow connecting signals
-                local allow_signals = true
-
-                -- Function to connect signals
-                local function connect_signals()
-                    if allow_signals then
-                        c:connect_signal("property::name", function()
-                            handle_name_change()
-                            -- if handle_name_change() then
-                            --     -- Disconnect all signals if both Linear and Claude are positioned
-                            --     c:disconnect_signal("property::name", nil)
-                            --     allow_signals = false
-                            --     naughty.notify({
-                            --         preset = naughty.config.presets.critical,
-                            --         title = "[Signals Disconnected]",
-                            --         text = "All signals disconnected for " ..
-                            --             c.name .. ". Both Claude and Linear positioned.",
-                            --     })
-                            -- end
-                        end)
-                    end
-                end
-
-                -- Connect signals initially
-                connect_signals()
-
-                -- Override the connect_signal method to prevent future connections after both are positioned
-                -- local original_connect_signal = c.connect_signal
-                -- c.connect_signal = function(self, ...)
-                --     if allow_signals then
-                --         original_connect_signal(self, ...)
-                --     else
-                --         naughty.notify({
-                --             preset = naughty.config.presets.critical,
-                --             title = "[Signal Connection Prevented]",
-                --             text = "Attempted to connect signal for " .. c.name .. " after Claude and Linear positioned.",
-                --         })
-                --     end
-                -- end
-
-                -- Call handle_name_change immediately for initial state
-                handle_name_change()
-            end,
+            -- callback = function(c)
+            --     local function handle_name_change()
+            --         if case_insensitive_match(c.name, 'linear') then
+            --             position_window(c, 2, true)
+            --             ensure_window_accessible(c)
+            --             linear_positioned = true
+            --         elseif case_insensitive_match(c.name, 'claude') then
+            --             position_window(c, 4, true)
+            --             ensure_window_accessible(c)
+            --             claude_positioned = true
+            --         else
+            --             -- For any other tab, position it to tag 2
+            --             position_window(c, 2, false)
+            --         end
+            --
+            --         -- Check if both Claude and Linear have been positioned
+            --         if claude_positioned and linear_positioned then
+            --             return true -- Signal to disconnect
+            --         end
+            --         return false
+            --     end
+            --
+            --     -- Flag to track if we should allow connecting signals
+            --     local allow_signals = true
+            --
+            --     -- Function to connect signals
+            --     local function connect_signals()
+            --         if allow_signals then
+            --             c:connect_signal("property::name", function()
+            --                 handle_name_change()
+            --                 -- if handle_name_change() then
+            --                 --     -- Disconnect all signals if both Linear and Claude are positioned
+            --                 --     c:disconnect_signal("property::name", nil)
+            --                 --     allow_signals = false
+            --                 --     naughty.notify({
+            --                 --         preset = naughty.config.presets.critical,
+            --                 --         title = "[Signals Disconnected]",
+            --                 --         text = "All signals disconnected for " ..
+            --                 --             c.name .. ". Both Claude and Linear positioned.",
+            --                 --     })
+            --                 -- end
+            --             end)
+            --         end
+            --     end
+            --
+            --     -- Connect signals initially
+            --     connect_signals()
+            --
+            --     -- Override the connect_signal method to prevent future connections after both are positioned
+            --     -- local original_connect_signal = c.connect_signal
+            --     -- c.connect_signal = function(self, ...)
+            --     --     if allow_signals then
+            --     --         original_connect_signal(self, ...)
+            --     --     else
+            --     --         naughty.notify({
+            --     --             preset = naughty.config.presets.critical,
+            --     --             title = "[Signal Connection Prevented]",
+            --     --             text = "Attempted to connect signal for " .. c.name .. " after Claude and Linear positioned.",
+            --     --         })
+            --     --     end
+            --     -- end
+            --
+            --     -- Call handle_name_change immediately for initial state
+            --     handle_name_change()
+            -- end,
         }
     },
     {
