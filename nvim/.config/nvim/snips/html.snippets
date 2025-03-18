@@ -1,0 +1,16 @@
+priority 50
+
+snippet idk "div snippet" b
+<div>
+$0
+</div>
+endsnippet
+
+snippet t
+<tag>${VISUAL:inside text/should/is/g}</tag>
+endsnippet
+
+snippet "(\w+).par" "Parenthesis (postfix)" r
+(`!p snip.rv = match.group(1)`$1)$0
+endsnippet
+
