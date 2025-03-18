@@ -41,39 +41,45 @@ return {
     },
     {
         "stevearc/conform.nvim",
-        keys = {
-            {
-                "<leader>f",
-                function()
-                    require("conform").format({ async = true, lsp_fallback = true })
-                end,
-                mode = "",
-                desc = "Format buffer",
-            },
-        },
-        init = function()
-            vim.api.nvim_create_autocmd("BufWritePre", {
-                pattern = "*",
-                callback = function(args)
-                    require("conform").format({ bufnr = args.buf, lsp_fallback = true })
-                end,
-            })
-        end,
-        opts = {
-            formatters_by_ft = {
-                lua = { "stylua" },
-                markdown = { { "prettierd", "prettier" } },
-                javascript = { { "prettierd", "prettier" } },
-            },
-        },
-
-        -- tailwind class sorting
-        -- {
-        --     'laytan/tailwind-sorter.nvim',
-        --     event = "VeryLazy",
-        --     dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-lua/plenary.nvim' },
-        --     build = 'cd formatter && npm i && npm run build',
-        --     config = true,
-        -- },
-    }
+		keys = {
+			{
+				"<leader>f",
+				function()
+					require("conform").format({ async = true, lsp_fallback = true })
+				end,
+				mode = "",
+				desc = "Format buffer",
+			},
+		},
+		init = function()
+			vim.api.nvim_create_autocmd("BufWritePre", {
+				pattern = "*",
+				callback = function(args)
+					require("conform").format({ bufnr = args.buf, lsp_fallback = true })
+				end,
+			})
+		end,
+		opts = {
+			log_level = vim.log.levels.DEBUG,
+			formatters_by_ft = {
+				lua = { "stylua" },
+				-- markdown = function(bufnr)
+				--     if string.find(vim.fn.expand('%:p'), 'svelte') then
+				--         return {}
+				--     end
+				--     return { "prettierd", "prettier" }
+				-- end,
+				latex = { "latexindent" },
+				javascript = { "prettierd", "prettier" },
+			},
+		},
+    },
+    -- tailwind class sorting
+    -- {
+    --     'laytan/tailwind-sorter.nvim',
+    --     event = "VeryLazy",
+    --     dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-lua/plenary.nvim' },
+    --     build = 'cd formatter && npm i && npm run build',
+    --     config = true,
+    -- },
 }
