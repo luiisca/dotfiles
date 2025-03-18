@@ -1014,73 +1014,73 @@ awful.rules.rules = {
         rule = {
             class = 'Vivaldi-stable',
         },
-        properties = {
-            -- callback = function(c)
-            --     local function handle_name_change()
-            --         if case_insensitive_match(c.name, 'linear') then
-            --             position_window(c, 2, true)
-            --             ensure_window_accessible(c)
-            --             linear_positioned = true
-            --         elseif case_insensitive_match(c.name, 'claude') then
-            --             position_window(c, 4, true)
-            --             ensure_window_accessible(c)
-            --             claude_positioned = true
-            --         else
-            --             -- For any other tab, position it to tag 2
-            --             position_window(c, 2, false)
-            --         end
-            --
-            --         -- Check if both Claude and Linear have been positioned
-            --         if claude_positioned and linear_positioned then
-            --             return true -- Signal to disconnect
-            --         end
-            --         return false
-            --     end
-            --
-            --     -- Flag to track if we should allow connecting signals
-            --     local allow_signals = true
-            --
-            --     -- Function to connect signals
-            --     local function connect_signals()
-            --         if allow_signals then
-            --             c:connect_signal("property::name", function()
-            --                 handle_name_change()
-            --                 -- if handle_name_change() then
-            --                 --     -- Disconnect all signals if both Linear and Claude are positioned
-            --                 --     c:disconnect_signal("property::name", nil)
-            --                 --     allow_signals = false
-            --                 --     naughty.notify({
-            --                 --         preset = naughty.config.presets.critical,
-            --                 --         title = "[Signals Disconnected]",
-            --                 --         text = "All signals disconnected for " ..
-            --                 --             c.name .. ". Both Claude and Linear positioned.",
-            --                 --     })
-            --                 -- end
-            --             end)
-            --         end
-            --     end
-            --
-            --     -- Connect signals initially
-            --     connect_signals()
-            --
-            --     -- Override the connect_signal method to prevent future connections after both are positioned
-            --     -- local original_connect_signal = c.connect_signal
-            --     -- c.connect_signal = function(self, ...)
-            --     --     if allow_signals then
-            --     --         original_connect_signal(self, ...)
-            --     --     else
-            --     --         naughty.notify({
-            --     --             preset = naughty.config.presets.critical,
-            --     --             title = "[Signal Connection Prevented]",
-            --     --             text = "Attempted to connect signal for " .. c.name .. " after Claude and Linear positioned.",
-            --     --         })
-            --     --     end
-            --     -- end
-            --
-            --     -- Call handle_name_change immediately for initial state
-            --     handle_name_change()
-            -- end,
-        }
+        -- properties = {
+        -- callback = function(c)
+        --     local function handle_name_change()
+        --         if case_insensitive_match(c.name, 'linear') then
+        --             position_window(c, 2, true)
+        --             ensure_window_accessible(c)
+        --             linear_positioned = true
+        --         elseif case_insensitive_match(c.name, 'claude') then
+        --             position_window(c, 4, true)
+        --             ensure_window_accessible(c)
+        --             claude_positioned = true
+        --         else
+        --             -- For any other tab, position it to tag 2
+        --             position_window(c, 2, false)
+        --         end
+        --
+        --         -- Check if both Claude and Linear have been positioned
+        --         if claude_positioned and linear_positioned then
+        --             return true -- Signal to disconnect
+        --         end
+        --         return false
+        --     end
+        --
+        --     -- Flag to track if we should allow connecting signals
+        --     local allow_signals = true
+        --
+        --     -- Function to connect signals
+        --     local function connect_signals()
+        --         if allow_signals then
+        --             c:connect_signal("property::name", function()
+        --                 handle_name_change()
+        --                 -- if handle_name_change() then
+        --                 --     -- Disconnect all signals if both Linear and Claude are positioned
+        --                 --     c:disconnect_signal("property::name", nil)
+        --                 --     allow_signals = false
+        --                 --     naughty.notify({
+        --                 --         preset = naughty.config.presets.critical,
+        --                 --         title = "[Signals Disconnected]",
+        --                 --         text = "All signals disconnected for " ..
+        --                 --             c.name .. ". Both Claude and Linear positioned.",
+        --                 --     })
+        --                 -- end
+        --             end)
+        --         end
+        --     end
+        --
+        --     -- Connect signals initially
+        --     connect_signals()
+        --
+        --     -- Override the connect_signal method to prevent future connections after both are positioned
+        --     -- local original_connect_signal = c.connect_signal
+        --     -- c.connect_signal = function(self, ...)
+        --     --     if allow_signals then
+        --     --         original_connect_signal(self, ...)
+        --     --     else
+        --     --         naughty.notify({
+        --     --             preset = naughty.config.presets.critical,
+        --     --             title = "[Signal Connection Prevented]",
+        --     --             text = "Attempted to connect signal for " .. c.name .. " after Claude and Linear positioned.",
+        --     --         })
+        --     --     end
+        --     -- end
+        --
+        --     -- Call handle_name_change immediately for initial state
+        --     handle_name_change()
+        -- end,
+        -- }
     },
     {
         rule = {
