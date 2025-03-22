@@ -7,20 +7,18 @@ Reboot\0icon\x1f\U1F504\n\
 Logout\0icon\x1f\U1F512"
 
 # Rofi command to display the options
-chosen=$(echo -e "$options" | rofi -dmenu -i -markup-rows -p "System")
+chosen=$(echo -e "$options" | rofi -dmenu -i -markup -p "System")
 
 # Execute the chosen option
 case "$chosen" in
-    *Shutdown*)
-        systemctl poweroff
-        ;;
-    *Reboot*)
-        systemctl reboot
-        ;;
-    *Logout*)
-        awesome-client "awesome.quit()"
-        ;;
-    *)
-        ;;
+*Shutdown*)
+    systemctl poweroff
+    ;;
+*Reboot*)
+    systemctl reboot
+    ;;
+*Logout*)
+    awesome-client "awesome.quit()"
+    ;;
+*) ;;
 esac
-
