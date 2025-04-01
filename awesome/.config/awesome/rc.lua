@@ -157,8 +157,8 @@ local cycle_prev = true -- cycle with only the previously focused client or all 
 
 -- personal variables
 -- change these variables if you want
-local browser1 = "vivaldi"
-local browser2 = "microsoft-edge-dev"
+local browser1 = "qutebrowser"
+local browser2 = "vivaldi"
 local editor = os.getenv("EDITOR") or "nvim"
 local filemanager = "vifm"
 local mediaplayer = "Spotify"
@@ -416,6 +416,12 @@ globalkeys = my_table.join( -- {{{ Personal keybindings
 	}),
 	awful.key({}, "XF86Favorites", function()
 		awful.spawn.with_shell("~/.config/awesome/latex-workflows.sh")
+	end, {
+		description = "latex workflows",
+		group = "hotkeys",
+	}),
+	awful.key({}, "Print", function()
+		awful.spawn.with_shell("~/.config/awesome/take-screenshot.sh")
 	end, {
 		description = "latex workflows",
 		group = "hotkeys",

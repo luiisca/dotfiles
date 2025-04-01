@@ -65,7 +65,6 @@ syncthing --no-browser &
 #     run lutris
 # else
 run "redshift -P -O 3000"
-"$HOME"/p/r/pomlock/pomlock.sh -p extended &
 
 # nvim
 # alacritty -e tmux &
@@ -74,10 +73,10 @@ run "redshift -P -O 3000"
 obsidian &
 
 # spotify
-run "playerctld daemon"
-run "LD_PRELOAD=/usr/local/lib/spotify-adblock.so spotify"
-sleep 15
-playerctl open spotify:playlist:37i9dQZF1DWVqfgj8NZEp1 &
-playerctl volume 0.35 &
+# run "playerctld daemon"
+# run "LD_PRELOAD=/usr/local/lib/spotify-adblock.so spotify"
+# sleep 15
+# playerctl open spotify:playlist:37i9dQZF1DWVqfgj8NZEp1 &
+# playerctl volume 0.35 &
 
 # fi
