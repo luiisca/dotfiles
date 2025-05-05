@@ -17,13 +17,28 @@ download_dir = os.path.expanduser("~/Downloads")
 if not os.path.exists(download_dir):
     os.makedirs(download_dir)
 
+# Determine the desired format
+# Default: best video + best audio
+default_format = "bv*+ba/b"
+video_format = default_format
+
+# Check if a format argument was passed from qutebrowser
+if len(sys.argv) > 1:
+    video_format = sys.argv[1]
+    print(f"Using custom format: {video_format}", file=sys.stderr) # Log to stderr for debugging
+else:
+    print(f"Using default format: {default_format}", file=sys.stderr) # Log to stderr for debugging
+
+
 # Construct the yt-dlp command
 # -P specifies the download path
+# -f specifies the format
 # Add any other yt-dlp options you prefer here
-command = ["yt-dlp", "-P", download_dir, url]
+command = ["yt-dlp", "-P", download_dir, "-f", video_format, url]
 
 try:
     # Start the download process in the background
+    # Redirect stdout and stderr to prevent blocking qutebrowser
     subprocess.Popen(command, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
     # Send a message back to qutebrowser
