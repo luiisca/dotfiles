@@ -1,5 +1,6 @@
 # This file contains fish universal variable definitions.
 # VERSION: 3.0
+SETUVAR --export JAVA_HOME:/usr/lib/jvm/java\x2d21\x2dopenjdk
 SETUVAR --export PYENV_ROOT:/home/luisca/\x2epyenv
 SETUVAR __fish_initialized:3800
 SETUVAR fish_color_autosuggestion:brblack
