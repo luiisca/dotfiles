@@ -1,3 +1,5 @@
+-- vim.lsp.set_log_level(vim.log.levels.TRACE) -- Use the enum
+
 return {
 	{
 		"VonHeikemen/lsp-zero.nvim",
@@ -17,46 +19,46 @@ return {
 	},
 
 	-- Snippets
-	{
-		"SirVer/ultisnips",
-		dependencies = { "honza/vim-snippets" },
-		config = function()
-			local default_dirs = {
-				vim.fn.stdpath("config") .. "/snips",
-				"UltiSnips",
-			}
-
-			vim.g.UltiSnipsSnippetDirectories = default_dirs
-
-			-- vim.g.UltiSnipsExpandTrigger = "<tab>"
-			-- vim.g.UltiSnipsJumpForwardTrigger = "<c-a-b>"
-			-- vim.g.UltiSnipsJumpBackwardTrigger = "<c-a-y>"
-			-- Tex-specific configuration
-
-			-- vim.api.nvim_create_autocmd({ "BufEnter", "FileType" }, {
-			-- 	pattern = "tex",
-			-- 	callback = function()
-			-- 		-- Set tex-specific directories
-			-- 		vim.g.UltiSnipsSnippetDirectories = {
-			-- 			vim.fn.stdpath("config") .. "/snips",
-			-- 		}
-			-- 		vim.g.UltiSnipsEnableSnipMate = 0
-			-- 	end,
-			-- })
-			--
-			-- -- Reset configuration for non-tex buffers
-			-- vim.api.nvim_create_autocmd({ "BufLeave", "FileType" }, {
-			-- 	pattern = "tex",
-			-- 	callback = function()
-			-- 		-- Restore default directories
-			-- 		vim.g.UltiSnipsSnippetDirectories = default_dirs
-			-- 		vim.g.UltiSnipsEnableSnipMate = 1
-			-- 	end,
-			-- })
-
-			vim.g.UltiSnipsEditSplit = "vertical"
-		end,
-	},
+	-- {
+	-- 	"SirVer/ultisnips",
+	-- 	dependencies = { "honza/vim-snippets" },
+	-- 	config = function()
+	-- 		local default_dirs = {
+	-- 			vim.fn.stdpath("config") .. "/snips",
+	-- 			"UltiSnips",
+	-- 		}
+	--
+	-- 		vim.g.UltiSnipsSnippetDirectories = default_dirs
+	--
+	-- 		-- vim.g.UltiSnipsExpandTrigger = "<tab>"
+	-- 		-- vim.g.UltiSnipsJumpForwardTrigger = "<c-a-b>"
+	-- 		-- vim.g.UltiSnipsJumpBackwardTrigger = "<c-a-y>"
+	-- 		-- Tex-specific configuration
+	--
+	-- 		-- vim.api.nvim_create_autocmd({ "BufEnter", "FileType" }, {
+	-- 		-- 	pattern = "tex",
+	-- 		-- 	callback = function()
+	-- 		-- 		-- Set tex-specific directories
+	-- 		-- 		vim.g.UltiSnipsSnippetDirectories = {
+	-- 		-- 			vim.fn.stdpath("config") .. "/snips",
+	-- 		-- 		}
+	-- 		-- 		vim.g.UltiSnipsEnableSnipMate = 0
+	-- 		-- 	end,
+	-- 		-- })
+	-- 		--
+	-- 		-- -- Reset configuration for non-tex buffers
+	-- 		-- vim.api.nvim_create_autocmd({ "BufLeave", "FileType" }, {
+	-- 		-- 	pattern = "tex",
+	-- 		-- 	callback = function()
+	-- 		-- 		-- Restore default directories
+	-- 		-- 		vim.g.UltiSnipsSnippetDirectories = default_dirs
+	-- 		-- 		vim.g.UltiSnipsEnableSnipMate = 1
+	-- 		-- 	end,
+	-- 		-- })
+	--
+	-- 		vim.g.UltiSnipsEditSplit = "vertical"
+	-- 	end,
+	-- },
 
 	-- Autocompletion
 	{
@@ -64,14 +66,14 @@ return {
 		event = "InsertEnter",
 		dependencies = {
 			{ "L3MON4D3/LuaSnip", dependencies = { "rafamadriz/friendly-snippets" } },
-			{
-				"quangnguyen30192/cmp-nvim-ultisnips",
-				dependencies = { "nvim-treesitter/nvim-treesitter" },
-				config = function()
-					-- optional call to setup (see customization section)
-					require("cmp_nvim_ultisnips").setup({})
-				end,
-			},
+			-- {
+			-- 	"quangnguyen30192/cmp-nvim-ultisnips",
+			-- 	dependencies = { "nvim-treesitter/nvim-treesitter" },
+			-- 	config = function()
+			-- 		-- optional call to setup (see customization section)
+			-- 		require("cmp_nvim_ultisnips").setup({})
+			-- 	end,
+			-- },
 			{ "hrsh7th/cmp-buffer" },
 			{ "hrsh7th/cmp-path" },
 			{ "hrsh7th/cmp-nvim-lua" },
@@ -104,7 +106,7 @@ return {
 			local cmp_action = lsp_zero.cmp_action()
 			local cmp_select = { behavior = cmp.SelectBehavior.Select }
 
-			local cmp_ultisnips_mappings = require("cmp_nvim_ultisnips.mappings")
+			-- local cmp_ultisnips_mappings = require("cmp_nvim_ultisnips.mappings")
 
 			cmp.setup({
 				completion = {
@@ -112,12 +114,12 @@ return {
 				},
 				snippet = {
 					expand = function(args)
-						-- require("luasnip").lsp_expand(args.body)
-						vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
+						require("luasnip").lsp_expand(args.body)
+						-- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
 					end,
 				},
 				sources = {
-					{ name = "ultisnips" },
+					-- { name = "ultisnips" },
 					{ name = "luasnip" },
 					{ name = "nvim_lsp" },
 					{ name = "buffer" },
@@ -126,9 +128,9 @@ return {
 				},
 				formatting = lsp_zero.cmp_format(),
 				mapping = cmp.mapping.preset.insert({
-					["<Tab>"] = cmp.mapping(function(fallback)
-						cmp_ultisnips_mappings.compose({ "expand" })(fallback)
-					end),
+					-- ["<Tab>"] = cmp.mapping(function(fallback)
+					-- 	cmp_ultisnips_mappings.compose({ "expand" })(fallback)
+					-- end),
 					["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
 					-- ["<c-z>"] = cmp.mapping(function(fallback)
 					-- 	cmp_ultisnips_mappings.compose({ "jump_backwards" })(fallback)
@@ -231,9 +233,32 @@ return {
 			})
 
 			require("mason-lspconfig").setup({
-				ensure_installed = { "lua_ls", "ts_ls", "tailwindcss", "prismals", "svelte", "texlab" },
+				ensure_installed = {
+					"bashls",
+					"lua_ls",
+					"ts_ls",
+					"denols",
+					"tailwindcss",
+					"prismals",
+					"svelte",
+					"texlab",
+				},
 				handlers = {
 					lsp_zero.default_setup,
+					ts_ls = function()
+						require("lspconfig").ts_ls.setup({
+							root_dir = require("lspconfig").util.root_pattern({ "package.json", "tsconfig.json" }),
+							single_file_support = false,
+							settings = {},
+						})
+					end,
+					denols = function()
+						require("lspconfig").denols.setup({
+							root_dir = require("lspconfig").util.root_pattern({ "deno.json", "deno.jsonc" }),
+							single_file_support = false,
+							settings = {},
+						})
+					end,
 					lua_ls = function()
 						-- local util = require("lspconfig.util")
 						-- (Optional) Configure lua language server for neovim
